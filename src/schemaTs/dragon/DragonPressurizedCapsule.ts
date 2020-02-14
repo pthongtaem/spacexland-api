@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int, ID, Float } from 'type-graphql';
+import { ObjectType, Field } from 'type-graphql';
 import { Volume } from '../global/Volume';
 
 @ObjectType()

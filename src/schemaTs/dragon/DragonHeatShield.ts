@@ -1,9 +1,9 @@
-import { ObjectType, Field, Int, ID, Float } from 'type-graphql';
+import { ObjectType, Field, Int, Float } from 'type-graphql';
 
 @ObjectType()
 export class DragonHeatShield {
   @Field({ nullable: true })
-  material?: String;
+  material?: string;
 
   @Field(() => Float, { nullable: true })
   size_meters?: number;

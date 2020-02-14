@@ -4,7 +4,7 @@ import { Core } from './Core';
 import { CoresFind } from './CoresFind';
 
 const collection = 'core';
-const parseCores = (core: any) => ({ ...core, id: core.core_serial });
+const parseCores = (core: any): any => ({ ...core, id: core.core_serial });
 
 @Resolver()
 export class CoreResolver {

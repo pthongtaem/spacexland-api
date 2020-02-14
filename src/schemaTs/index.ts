@@ -11,19 +11,20 @@ import { CapsuleResolver } from './capsule';
 import { CompanyResolver } from './company';
 import { CoreResolver } from './core';
 import { DragonResolver } from './dragon';
+import { GraphQLSchema } from 'graphql';
 
-const uri = process.env.X_HASURA_URL;
-const headers = {
-  'x-hasura-admin-secret': process.env.X_HASURA_ADMIN_SECRET,
-};
+// const uri = process.env.X_HASURA_URL;
+// const headers = {
+//   'x-hasura-admin-secret': process.env.X_HASURA_ADMIN_SECRET,
+// };
 
-const link = new HttpLink({
-  uri,
-  headers,
-  fetch,
-});
+// const link = new HttpLink({
+//   uri,
+//   headers,
+//   fetch,
+// });
 
-export default async () => {
+export default async (): Promise<GraphQLSchema> => {
   // const remoteSchema = makeRemoteExecutableSchema({
   //   schema: await introspectSchema(link),
   //   link,
