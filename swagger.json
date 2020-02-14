@@ -371,6 +371,225 @@
           }
         }
       }
+    },
+    "/rest/histories": {
+      "get": {
+        "operationId": "historiesQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/HistoryFind"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/History"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/histories-result": {
+      "get": {
+        "operationId": "historiesResultQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/HistoryFind"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoriesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/history/{id}": {
+      "get": {
+        "operationId": "historyQuery",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/History"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/landpads": {
+      "get": {
+        "operationId": "landpadsQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Landpad"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/landpad/{id}": {
+      "get": {
+        "operationId": "landpadQuery",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Landpad"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -416,6 +635,27 @@
           },
           "dragon": {
             "$ref": "#/components/schemas/Dragon"
+          },
+          "histories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/History"
+            }
+          },
+          "historiesResult": {
+            "$ref": "#/components/schemas/HistoriesResult"
+          },
+          "history": {
+            "$ref": "#/components/schemas/History"
+          },
+          "landpads": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Landpad"
+            }
+          },
+          "landpad": {
+            "$ref": "#/components/schemas/Landpad"
           }
         }
       },
@@ -475,6 +715,9 @@
           },
           "type": {
             "type": "string"
+          },
+          "dragon": {
+            "$ref": "#/components/schemas/Dragon"
           }
         }
       },
@@ -487,184 +730,6 @@
           },
           "name": {
             "type": "string"
-          }
-        }
-      },
-      "Info": {
-        "type": "object",
-        "properties": {
-          "ceo": {
-            "type": "string"
-          },
-          "coo": {
-            "type": "string"
-          },
-          "cto_propulsion": {
-            "type": "string"
-          },
-          "cto": {
-            "type": "string"
-          },
-          "employees": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "founded": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "founder": {
-            "type": "string"
-          },
-          "headquarters": {
-            "$ref": "#/components/schemas/Address"
-          },
-          "launch_sites": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "links": {
-            "$ref": "#/components/schemas/InfoLinks"
-          },
-          "name": {
-            "type": "string"
-          },
-          "summary": {
-            "type": "string"
-          },
-          "test_sites": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "valuation": {
-            "type": "number",
-            "format": "float"
-          },
-          "vehicles": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "Address": {
-        "type": "object",
-        "properties": {
-          "address": {
-            "type": "string"
-          },
-          "city": {
-            "type": "string"
-          },
-          "state": {
-            "type": "string"
-          }
-        }
-      },
-      "InfoLinks": {
-        "type": "object",
-        "properties": {
-          "elon_twitter": {
-            "type": "string"
-          },
-          "flickr": {
-            "type": "string"
-          },
-          "twitter": {
-            "type": "string"
-          },
-          "website": {
-            "type": "string"
-          }
-        }
-      },
-      "CoresFind": {
-        "type": "object",
-        "properties": {
-          "asds_attempts": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "asds_landings": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "block": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "id": {
-            "type": "string"
-          },
-          "missions": {
-            "type": "string"
-          },
-          "original_launch": {
-            "type": "object"
-          },
-          "reuse_count": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "rtls_attempts": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "rtls_landings": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "status": {
-            "type": "string"
-          },
-          "water_landing": {
-            "type": "boolean"
-          }
-        }
-      },
-      "Core": {
-        "type": "object",
-        "properties": {
-          "asds_attempts": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "asds_landings": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "block": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "id": {
-            "type": "string"
-          },
-          "missions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/CapsuleMission"
-            }
-          },
-          "original_launch": {
-            "type": "object"
-          },
-          "reuse_count": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "rtls_attempts": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "rtls_landings": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "status": {
-            "type": "string"
-          },
-          "water_landing": {
-            "type": "boolean"
           }
         }
       },
@@ -868,6 +933,313 @@
           },
           "unpressurized_cargo": {
             "type": "boolean"
+          }
+        }
+      },
+      "Info": {
+        "type": "object",
+        "properties": {
+          "ceo": {
+            "type": "string"
+          },
+          "coo": {
+            "type": "string"
+          },
+          "cto_propulsion": {
+            "type": "string"
+          },
+          "cto": {
+            "type": "string"
+          },
+          "employees": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "founded": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "founder": {
+            "type": "string"
+          },
+          "headquarters": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "launch_sites": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "links": {
+            "$ref": "#/components/schemas/InfoLinks"
+          },
+          "name": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "test_sites": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "valuation": {
+            "type": "number",
+            "format": "float"
+          },
+          "vehicles": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          }
+        }
+      },
+      "InfoLinks": {
+        "type": "object",
+        "properties": {
+          "elon_twitter": {
+            "type": "string"
+          },
+          "flickr": {
+            "type": "string"
+          },
+          "twitter": {
+            "type": "string"
+          },
+          "website": {
+            "type": "string"
+          }
+        }
+      },
+      "CoresFind": {
+        "type": "object",
+        "properties": {
+          "asds_attempts": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "asds_landings": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "block": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "id": {
+            "type": "string"
+          },
+          "missions": {
+            "type": "string"
+          },
+          "original_launch": {
+            "type": "object"
+          },
+          "reuse_count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rtls_attempts": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rtls_landings": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "string"
+          },
+          "water_landing": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Core": {
+        "type": "object",
+        "properties": {
+          "asds_attempts": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "asds_landings": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "block": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "id": {
+            "type": "string"
+          },
+          "missions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CapsuleMission"
+            }
+          },
+          "original_launch": {
+            "type": "object"
+          },
+          "reuse_count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rtls_attempts": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rtls_landings": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "string"
+          },
+          "water_landing": {
+            "type": "boolean"
+          }
+        }
+      },
+      "HistoryFind": {
+        "type": "object",
+        "properties": {
+          "end": {
+            "type": "object"
+          },
+          "flight_number": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "id": {
+            "type": "string"
+          },
+          "start": {
+            "type": "object"
+          }
+        }
+      },
+      "History": {
+        "type": "object",
+        "properties": {
+          "details": {
+            "type": "string"
+          },
+          "event_date_unix": {
+            "type": "object"
+          },
+          "event_date_utc": {
+            "type": "object"
+          },
+          "id": {
+            "type": "string"
+          },
+          "links": {
+            "$ref": "#/components/schemas/Link"
+          },
+          "title": {
+            "type": "string"
+          }
+        }
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "article": {
+            "type": "string"
+          },
+          "reddit": {
+            "type": "string"
+          },
+          "wikipedia": {
+            "type": "string"
+          }
+        }
+      },
+      "HistoriesResult": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/Result"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/History"
+            }
+          }
+        }
+      },
+      "Result": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Landpad": {
+        "type": "object",
+        "properties": {
+          "attempted_landings": {
+            "type": "string"
+          },
+          "details": {
+            "type": "string"
+          },
+          "full_name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "landing_type": {
+            "type": "string"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "status": {
+            "type": "string"
+          },
+          "successful_landings": {
+            "type": "string"
+          },
+          "wikipedia": {
+            "type": "string"
+          }
+        }
+      },
+      "Location": {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "format": "float"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "float"
+          },
+          "name": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
           }
         }
       }

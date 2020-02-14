@@ -53,8 +53,6 @@ export class CapsuleResolver {
       data = not_null_dates.concat(null_dates);
     }
 
-    console.log(data);
-
     if (limit) {
       return data.slice(0, limit);
     }

@@ -1,5 +1,7 @@
-import { ObjectType, Field, ID, Int } from 'type-graphql';
+import { ObjectType, Field, ID, Int, Root, Ctx } from 'type-graphql';
 import { CapsuleMission } from './CapsuleMission';
+import { Dragon } from '../dragon/Dragon';
+import { MyContext } from '../../types/MyContext';
 
 @ObjectType()
 export class Capsule {
@@ -23,4 +25,19 @@ export class Capsule {
 
   @Field({ nullable: true })
   type?: string;
+
+  capsule_id?: string;
+
+  @Field(() => Dragon, { nullable: true })
+  async dragon(
+    @Root() parent: Capsule,
+    @Ctx() context?: MyContext,
+  ): Promise<string | null> {
+    const [data] = await context.db
+      .collection('dragon')
+      .find({ id: parent.capsule_id })
+      .limit(1)
+      .toArray();
+    return data;
+  }
 }

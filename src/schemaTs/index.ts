@@ -12,6 +12,8 @@ import { CompanyResolver } from './company';
 import { CoreResolver } from './core';
 import { DragonResolver } from './dragon';
 import { GraphQLSchema } from 'graphql';
+import { HistortyResolver } from './history';
+import { LandPadResolver } from './landpad';
 
 // const uri = process.env.X_HASURA_URL;
 // const headers = {
@@ -31,7 +33,14 @@ export default async (): Promise<GraphQLSchema> => {
   // });
 
   const localSchema = await buildSchema({
-    resolvers: [CapsuleResolver, CompanyResolver, CoreResolver, DragonResolver],
+    resolvers: [
+      CapsuleResolver,
+      CompanyResolver,
+      CoreResolver,
+      DragonResolver,
+      HistortyResolver,
+      LandPadResolver,
+    ],
   });
 
   const schema = mergeSchemas({
