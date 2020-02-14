@@ -1,17 +1,17 @@
-import sofa, { OpenAPI } from "sofa-api";
-import cors from "cors";
-import swaggerUi from "swagger-ui-express";
-import swaggerDocument from "../../swagger.json";
+import sofa, { OpenAPI } from 'sofa-api';
+import cors from 'cors';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from '../../swagger.json';
 
 export default (app, { schema, context }) => {
   const openApi = OpenAPI({
     schema,
     info: {
-      title: "SpaceX REST API"
-    }
+      title: 'SpaceX REST API',
+    },
   });
 
-  const basePath = "/rest";
+  const basePath = '/rest';
 
   app.use(cors());
 
@@ -22,12 +22,12 @@ export default (app, { schema, context }) => {
       context,
       onRoute(info) {
         openApi.addRoute(info, { basePath });
-      }
-    })
+      },
+    }),
   );
 
   // writes every recorder route
-  openApi.save("./swagger.json");
+  openApi.save('./swagger.json');
 
   // expose rest docs
   app.use(basePath, swaggerUi.serve, swaggerUi.setup(swaggerDocument));

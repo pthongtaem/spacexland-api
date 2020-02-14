@@ -4,1606 +4,13 @@
     "title": "SpaceX REST API"
   },
   "paths": {
-    "/rest/capsule/{id}": {
-      "get": {
-        "operationId": "capsuleQuery",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/ID"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Capsule"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/capsules": {
-      "get": {
-        "operationId": "capsulesQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "find",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/CapsulesFind"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "order",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Capsule"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/capsules-past": {
-      "get": {
-        "operationId": "capsulesPastQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "find",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/CapsulesFind"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "order",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Capsule"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/capsules-upcoming": {
-      "get": {
-        "operationId": "capsulesUpcomingQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "find",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/CapsulesFind"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "order",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Capsule"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/company": {
-      "get": {
-        "operationId": "companyQuery",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Info"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/core/{id}": {
-      "get": {
-        "operationId": "coreQuery",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/ID"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Core"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/cores": {
-      "get": {
-        "operationId": "coresQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "find",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/CoresFind"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "order",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Core"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/cores-past": {
-      "get": {
-        "operationId": "coresPastQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "find",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/CoresFind"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "order",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Core"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/cores-upcoming": {
-      "get": {
-        "operationId": "coresUpcomingQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "find",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/CoresFind"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "order",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Core"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/dragon/{id}": {
-      "get": {
-        "operationId": "dragonQuery",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/ID"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Dragon"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/dragons": {
-      "get": {
-        "operationId": "dragonsQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Dragon"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/histories": {
-      "get": {
-        "operationId": "historiesQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "find",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/HistoryFind"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "order",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/History"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/histories-result": {
-      "get": {
-        "operationId": "historiesResultQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "find",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/HistoryFind"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "order",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HistoriesResult"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/history/{id}": {
-      "get": {
-        "operationId": "historyQuery",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/ID"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/History"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/landpad/{id}": {
-      "get": {
-        "operationId": "landpadQuery",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/ID"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Landpad"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/landpads": {
-      "get": {
-        "operationId": "landpadsQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Landpad"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/launch/{id}": {
-      "get": {
-        "operationId": "launchQuery",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/ID"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Launch"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/launch-latest": {
-      "get": {
-        "operationId": "launchLatestQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Launch"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/launch-next": {
-      "get": {
-        "operationId": "launchNextQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Launch"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/launches": {
-      "get": {
-        "operationId": "launchesQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "find",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/LaunchFind"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "order",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Launch"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/launches-past": {
-      "get": {
-        "operationId": "launchesPastQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "find",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/LaunchFind"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "order",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Launch"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/launches-past-result": {
-      "get": {
-        "operationId": "launchesPastResultQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "find",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/LaunchFind"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "order",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LaunchesPastResult"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/launches-upcoming": {
-      "get": {
-        "operationId": "launchesUpcomingQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "find",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/LaunchFind"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "order",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Launch"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/launchpad/{id}": {
-      "get": {
-        "operationId": "launchpadQuery",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/ID"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Launchpad"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/launchpads": {
-      "get": {
-        "operationId": "launchpadsQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Launchpad"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/mission/{id}": {
-      "get": {
-        "operationId": "missionQuery",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/ID"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Mission"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/missions": {
-      "get": {
-        "operationId": "missionsQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "find",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/MissionsFind"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Mission"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/missions-result": {
-      "get": {
-        "operationId": "missionsResultQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "find",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/MissionsFind"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MissionResult"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/payload/{id}": {
-      "get": {
-        "operationId": "payloadQuery",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/ID"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Payload"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/payloads": {
-      "get": {
-        "operationId": "payloadsQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "find",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/PayloadsFind"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "order",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Payload"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/roadster": {
-      "get": {
-        "operationId": "roadsterQuery",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Roadster"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/rocket/{id}": {
-      "get": {
-        "operationId": "rocketQuery",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/ID"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Rocket"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/rockets": {
-      "get": {
-        "operationId": "rocketsQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Rocket"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/rockets-result": {
-      "get": {
-        "operationId": "rocketsResultQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RocketsResult"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/ship/{id}": {
-      "get": {
-        "operationId": "shipQuery",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/ID"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Ship"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/ships": {
-      "get": {
-        "operationId": "shipsQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "find",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/ShipsFind"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "order",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Ship"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/rest/ships-result": {
-      "get": {
-        "operationId": "shipsResultQuery",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "find",
-            "required": false,
-            "schema": {
-              "$ref": "#/components/schemas/ShipsFind"
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "in": "query",
-            "name": "order",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ShipsResult"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/rest/users": {
       "get": {
         "operationId": "usersQuery",
         "parameters": [
           {
             "in": "query",
-            "name": "distinctOn",
+            "name": "distinct_on",
             "required": false,
             "schema": {
               "type": "array",
@@ -1652,6 +59,7 @@
         ],
         "responses": {
           "200": {
+            "description": "fetch data from the table: \"users\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -1672,7 +80,7 @@
         "parameters": [
           {
             "in": "query",
-            "name": "distinctOn",
+            "name": "distinct_on",
             "required": false,
             "schema": {
               "type": "array",
@@ -1740,6 +148,7 @@
         ],
         "responses": {
           "200": {
+            "description": "fetch aggregated fields from the table: \"users\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -1766,6 +175,7 @@
         ],
         "responses": {
           "200": {
+            "description": "fetch data from the table: \"users\" using primary key columns",
             "content": {
               "application/json": {
                 "schema": {
@@ -1777,27 +187,1659 @@
         }
       }
     },
+    "/rest/capsules": {
+      "get": {
+        "operationId": "capsulesQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/CapsulesFind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Capsule"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/capsules-past": {
+      "get": {
+        "operationId": "capsulesPastQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/CapsulesFind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Capsule"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/capsules-upcoming": {
+      "get": {
+        "operationId": "capsulesUpcomingQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/CapsulesFind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Capsule"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/capsule/{id}": {
+      "get": {
+        "operationId": "capsuleQuery",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Capsule"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/company": {
+      "get": {
+        "operationId": "companyQuery",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Info"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/cores": {
+      "get": {
+        "operationId": "coresQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/CoresFind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Core"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/cores-past": {
+      "get": {
+        "operationId": "coresPastQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/CoresFind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Core"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/cores-upcoming": {
+      "get": {
+        "operationId": "coresUpcomingQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/CoresFind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Core"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/core/{id}": {
+      "get": {
+        "operationId": "coreQuery",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Core"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/dragons": {
+      "get": {
+        "operationId": "dragonsQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Dragon"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/dragon/{id}": {
+      "get": {
+        "operationId": "dragonQuery",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dragon"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/histories": {
+      "get": {
+        "operationId": "historiesQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/HistoryFind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/History"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/histories-result": {
+      "get": {
+        "operationId": "historiesResultQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/HistoryFind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HistoriesResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/history/{id}": {
+      "get": {
+        "operationId": "historyQuery",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/History"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/landpads": {
+      "get": {
+        "operationId": "landpadsQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Landpad"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/landpad/{id}": {
+      "get": {
+        "operationId": "landpadQuery",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Landpad"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/launches": {
+      "get": {
+        "operationId": "launchesQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/LaunchFind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Launch"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/launches-past": {
+      "get": {
+        "operationId": "launchesPastQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/LaunchFind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Launch"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/launches-past-result": {
+      "get": {
+        "operationId": "launchesPastResultQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/LaunchFind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LaunchesPastResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/launches-upcoming": {
+      "get": {
+        "operationId": "launchesUpcomingQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/LaunchFind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Launch"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/launch/{id}": {
+      "get": {
+        "operationId": "launchQuery",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Launch"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/launch-latest": {
+      "get": {
+        "operationId": "launchLatestQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Launch"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/launch-next": {
+      "get": {
+        "operationId": "launchNextQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Launch"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/launchpads": {
+      "get": {
+        "operationId": "launchpadsQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Launchpad"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/launchpad/{id}": {
+      "get": {
+        "operationId": "launchpadQuery",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Launchpad"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/missions": {
+      "get": {
+        "operationId": "missionsQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/MissionsFind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Mission"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/missions-result": {
+      "get": {
+        "operationId": "missionsResultQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/MissionsFind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MissionResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/mission/{id}": {
+      "get": {
+        "operationId": "missionQuery",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Mission"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/payloads": {
+      "get": {
+        "operationId": "payloadsQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/PayloadsFind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Payload"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/payload/{id}": {
+      "get": {
+        "operationId": "payloadQuery",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payload"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/roadster": {
+      "get": {
+        "operationId": "roadsterQuery",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Roadster"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/rockets": {
+      "get": {
+        "operationId": "rocketsQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Rocket"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/rockets-result": {
+      "get": {
+        "operationId": "rocketsResultQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RocketsResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/rocket/{id}": {
+      "get": {
+        "operationId": "rocketQuery",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Rocket"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/ships": {
+      "get": {
+        "operationId": "shipsQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/ShipsFind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ship"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/ships-result": {
+      "get": {
+        "operationId": "shipsResultQuery",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "find",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/ShipsFind"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShipsResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rest/ship/{id}": {
+      "get": {
+        "operationId": "shipQuery",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ship"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/rest/delete-users": {
       "post": {
         "operationId": "deleteUsersMutation",
-        "parameters": [],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["where"],
                 "properties": {
                   "where": {
                     "$ref": "#/components/schemas/users_bool_exp"
                   }
-                }
+                },
+                "required": [
+                  "where"
+                ]
               }
             }
           }
         },
         "responses": {
           "200": {
+            "description": "delete data from the table: \"users\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -1812,13 +1854,11 @@
     "/rest/insert-users": {
       "post": {
         "operationId": "insertUsersMutation",
-        "parameters": [],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["objects"],
                 "properties": {
                   "objects": {
                     "type": "array",
@@ -1829,13 +1869,17 @@
                   "on_conflict": {
                     "$ref": "#/components/schemas/users_on_conflict"
                   }
-                }
+                },
+                "required": [
+                  "objects"
+                ]
               }
             }
           }
         },
         "responses": {
           "200": {
+            "description": "insert data into the table: \"users\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -1850,13 +1894,11 @@
     "/rest/update-users": {
       "post": {
         "operationId": "updateUsersMutation",
-        "parameters": [],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["where"],
                 "properties": {
                   "_set": {
                     "$ref": "#/components/schemas/users_set_input"
@@ -1864,13 +1906,17 @@
                   "where": {
                     "$ref": "#/components/schemas/users_bool_exp"
                   }
-                }
+                },
+                "required": [
+                  "where"
+                ]
               }
             }
           }
         },
         "responses": {
           "200": {
+            "description": "update data of the table: \"users\"",
             "content": {
               "application/json": {
                 "schema": {
@@ -1887,10 +1933,25 @@
     "schemas": {
       "Query": {
         "type": "object",
-        "required": ["users", "users_aggregate"],
+        "required": [
+          "users",
+          "users_aggregate"
+        ],
         "properties": {
-          "capsule": {
-            "$ref": "#/components/schemas/Capsule"
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/users"
+            },
+            "description": "fetch data from the table: \"users\""
+          },
+          "users_aggregate": {
+            "$ref": "#/components/schemas/users_aggregate",
+            "description": "fetch aggregated fields from the table: \"users\""
+          },
+          "users_by_pk": {
+            "$ref": "#/components/schemas/users",
+            "description": "fetch data from the table: \"users\" using primary key columns"
           },
           "capsules": {
             "type": "array",
@@ -1910,11 +1971,11 @@
               "$ref": "#/components/schemas/Capsule"
             }
           },
+          "capsule": {
+            "$ref": "#/components/schemas/Capsule"
+          },
           "company": {
             "$ref": "#/components/schemas/Info"
-          },
-          "core": {
-            "$ref": "#/components/schemas/Core"
           },
           "cores": {
             "type": "array",
@@ -1934,14 +1995,17 @@
               "$ref": "#/components/schemas/Core"
             }
           },
-          "dragon": {
-            "$ref": "#/components/schemas/Dragon"
+          "core": {
+            "$ref": "#/components/schemas/Core"
           },
           "dragons": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Dragon"
             }
+          },
+          "dragon": {
+            "$ref": "#/components/schemas/Dragon"
           },
           "histories": {
             "type": "array",
@@ -1955,23 +2019,14 @@
           "history": {
             "$ref": "#/components/schemas/History"
           },
-          "landpad": {
-            "$ref": "#/components/schemas/Landpad"
-          },
           "landpads": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Landpad"
             }
           },
-          "launch": {
-            "$ref": "#/components/schemas/Launch"
-          },
-          "launchLatest": {
-            "$ref": "#/components/schemas/Launch"
-          },
-          "launchNext": {
-            "$ref": "#/components/schemas/Launch"
+          "landpad": {
+            "$ref": "#/components/schemas/Landpad"
           },
           "launches": {
             "type": "array",
@@ -1994,8 +2049,14 @@
               "$ref": "#/components/schemas/Launch"
             }
           },
-          "launchpad": {
-            "$ref": "#/components/schemas/Launchpad"
+          "launch": {
+            "$ref": "#/components/schemas/Launch"
+          },
+          "launchLatest": {
+            "$ref": "#/components/schemas/Launch"
+          },
+          "launchNext": {
+            "$ref": "#/components/schemas/Launch"
           },
           "launchpads": {
             "type": "array",
@@ -2003,8 +2064,8 @@
               "$ref": "#/components/schemas/Launchpad"
             }
           },
-          "mission": {
-            "$ref": "#/components/schemas/Mission"
+          "launchpad": {
+            "$ref": "#/components/schemas/Launchpad"
           },
           "missions": {
             "type": "array",
@@ -2015,8 +2076,8 @@
           "missionsResult": {
             "$ref": "#/components/schemas/MissionResult"
           },
-          "payload": {
-            "$ref": "#/components/schemas/Payload"
+          "mission": {
+            "$ref": "#/components/schemas/Mission"
           },
           "payloads": {
             "type": "array",
@@ -2024,11 +2085,11 @@
               "$ref": "#/components/schemas/Payload"
             }
           },
+          "payload": {
+            "$ref": "#/components/schemas/Payload"
+          },
           "roadster": {
             "$ref": "#/components/schemas/Roadster"
-          },
-          "rocket": {
-            "$ref": "#/components/schemas/Rocket"
           },
           "rockets": {
             "type": "array",
@@ -2039,8 +2100,8 @@
           "rocketsResult": {
             "$ref": "#/components/schemas/RocketsResult"
           },
-          "ship": {
-            "$ref": "#/components/schemas/Ship"
+          "rocket": {
+            "$ref": "#/components/schemas/Rocket"
           },
           "ships": {
             "type": "array",
@@ -2051,26 +2112,331 @@
           "shipsResult": {
             "$ref": "#/components/schemas/ShipsResult"
           },
-          "users": {
+          "ship": {
+            "$ref": "#/components/schemas/Ship"
+          }
+        }
+      },
+      "users_order_by": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "object"
+          },
+          "name": {
+            "type": "object"
+          },
+          "rocket": {
+            "type": "object"
+          },
+          "timestamp": {
+            "type": "object"
+          },
+          "twitter": {
+            "type": "object"
+          }
+        },
+        "description": "ordering options when selecting data from \"users\""
+      },
+      "users_bool_exp": {
+        "type": "object",
+        "properties": {
+          "_and": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "_not": {
+            "type": "object"
+          },
+          "_or": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "id": {
+            "type": "object"
+          },
+          "name": {
+            "type": "object"
+          },
+          "rocket": {
+            "type": "object"
+          },
+          "timestamp": {
+            "type": "object"
+          },
+          "twitter": {
+            "type": "object"
+          }
+        },
+        "description": "Boolean expression to filter rows from the table \"users\". All fields are combined with a logical 'AND'."
+      },
+      "uuid_comparison_exp": {
+        "type": "object",
+        "properties": {
+          "_eq": {
+            "type": "object"
+          },
+          "_gt": {
+            "type": "object"
+          },
+          "_gte": {
+            "type": "object"
+          },
+          "_in": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "_is_null": {
+            "type": "boolean"
+          },
+          "_lt": {
+            "type": "object"
+          },
+          "_lte": {
+            "type": "object"
+          },
+          "_neq": {
+            "type": "object"
+          },
+          "_nin": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "description": "expression to compare columns of type uuid. All fields are combined with logical 'AND'."
+      },
+      "String_comparison_exp": {
+        "type": "object",
+        "properties": {
+          "_eq": {
+            "type": "string"
+          },
+          "_gt": {
+            "type": "string"
+          },
+          "_gte": {
+            "type": "string"
+          },
+          "_ilike": {
+            "type": "string"
+          },
+          "_in": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "_is_null": {
+            "type": "boolean"
+          },
+          "_like": {
+            "type": "string"
+          },
+          "_lt": {
+            "type": "string"
+          },
+          "_lte": {
+            "type": "string"
+          },
+          "_neq": {
+            "type": "string"
+          },
+          "_nilike": {
+            "type": "string"
+          },
+          "_nin": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "_nlike": {
+            "type": "string"
+          },
+          "_nsimilar": {
+            "type": "string"
+          },
+          "_similar": {
+            "type": "string"
+          }
+        },
+        "description": "expression to compare columns of type String. All fields are combined with logical 'AND'."
+      },
+      "timestamptz_comparison_exp": {
+        "type": "object",
+        "properties": {
+          "_eq": {
+            "type": "object"
+          },
+          "_gt": {
+            "type": "object"
+          },
+          "_gte": {
+            "type": "object"
+          },
+          "_in": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "_is_null": {
+            "type": "boolean"
+          },
+          "_lt": {
+            "type": "object"
+          },
+          "_lte": {
+            "type": "object"
+          },
+          "_neq": {
+            "type": "object"
+          },
+          "_nin": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        },
+        "description": "expression to compare columns of type timestamptz. All fields are combined with logical 'AND'."
+      },
+      "users": {
+        "type": "object",
+        "required": [
+          "id",
+          "timestamp"
+        ],
+        "properties": {
+          "id": {
+            "type": "object"
+          },
+          "name": {
+            "type": "string"
+          },
+          "rocket": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "object"
+          },
+          "twitter": {
+            "type": "string"
+          }
+        },
+        "description": "columns and relationships of \"users\""
+      },
+      "users_aggregate": {
+        "type": "object",
+        "required": [
+          "nodes"
+        ],
+        "properties": {
+          "aggregate": {
+            "$ref": "#/components/schemas/users_aggregate_fields"
+          },
+          "nodes": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/users"
             }
+          }
+        },
+        "description": "aggregated selection of \"users\""
+      },
+      "users_aggregate_fields": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "integer",
+            "format": "int32"
           },
-          "users_aggregate": {
-            "$ref": "#/components/schemas/users_aggregate"
+          "max": {
+            "$ref": "#/components/schemas/users_max_fields"
           },
-          "users_by_pk": {
-            "$ref": "#/components/schemas/users"
+          "min": {
+            "$ref": "#/components/schemas/users_min_fields"
+          }
+        },
+        "description": "aggregate fields of \"users\""
+      },
+      "users_max_fields": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "rocket": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "object"
+          },
+          "twitter": {
+            "type": "string"
+          }
+        },
+        "description": "aggregate max on columns"
+      },
+      "users_min_fields": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "rocket": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "object"
+          },
+          "twitter": {
+            "type": "string"
+          }
+        },
+        "description": "aggregate min on columns"
+      },
+      "CapsulesFind": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "landings": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mission": {
+            "type": "string"
+          },
+          "original_launch": {
+            "type": "object"
+          },
+          "reuse_count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
           }
         }
       },
       "Capsule": {
         "type": "object",
-        "required": [],
         "properties": {
           "id": {
-            "type": "object"
+            "type": "string"
           },
           "landings": {
             "type": "integer",
@@ -2102,7 +2468,6 @@
       },
       "CapsuleMission": {
         "type": "object",
-        "required": [],
         "properties": {
           "flight": {
             "type": "integer",
@@ -2115,7 +2480,6 @@
       },
       "Dragon": {
         "type": "object",
-        "required": [],
         "properties": {
           "active": {
             "type": "boolean"
@@ -2148,7 +2512,7 @@
             "$ref": "#/components/schemas/Distance"
           },
           "id": {
-            "type": "object"
+            "type": "string"
           },
           "launch_payload_mass": {
             "$ref": "#/components/schemas/Mass"
@@ -2195,7 +2559,6 @@
       },
       "Distance": {
         "type": "object",
-        "required": [],
         "properties": {
           "feet": {
             "type": "number",
@@ -2209,7 +2572,6 @@
       },
       "DragonHeatShield": {
         "type": "object",
-        "required": [],
         "properties": {
           "dev_partner": {
             "type": "string"
@@ -2229,7 +2591,6 @@
       },
       "Mass": {
         "type": "object",
-        "required": [],
         "properties": {
           "kg": {
             "type": "integer",
@@ -2243,7 +2604,6 @@
       },
       "Volume": {
         "type": "object",
-        "required": [],
         "properties": {
           "cubic_feet": {
             "type": "integer",
@@ -2257,7 +2617,6 @@
       },
       "DragonPressurizedCapsule": {
         "type": "object",
-        "required": [],
         "properties": {
           "payload_volume": {
             "$ref": "#/components/schemas/Volume"
@@ -2266,7 +2625,6 @@
       },
       "DragonThrust": {
         "type": "object",
-        "required": [],
         "properties": {
           "amount": {
             "type": "integer",
@@ -2292,7 +2650,6 @@
       },
       "Force": {
         "type": "object",
-        "required": [],
         "properties": {
           "kN": {
             "type": "number",
@@ -2306,7 +2663,6 @@
       },
       "DragonTrunk": {
         "type": "object",
-        "required": [],
         "properties": {
           "cargo": {
             "$ref": "#/components/schemas/DragonTrunkCargo"
@@ -2318,7 +2674,6 @@
       },
       "DragonTrunkCargo": {
         "type": "object",
-        "required": [],
         "properties": {
           "solar_array": {
             "type": "integer",
@@ -2329,38 +2684,8 @@
           }
         }
       },
-      "CapsulesFind": {
-        "type": "object",
-        "required": [],
-        "properties": {
-          "id": {
-            "type": "object"
-          },
-          "landings": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "mission": {
-            "type": "string"
-          },
-          "original_launch": {
-            "type": "object"
-          },
-          "reuse_count": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "status": {
-            "type": "string"
-          },
-          "type": {
-            "type": "string"
-          }
-        }
-      },
       "Info": {
         "type": "object",
-        "required": [],
         "properties": {
           "ceo": {
             "type": "string"
@@ -2417,7 +2742,6 @@
       },
       "Address": {
         "type": "object",
-        "required": [],
         "properties": {
           "address": {
             "type": "string"
@@ -2432,7 +2756,6 @@
       },
       "InfoLinks": {
         "type": "object",
-        "required": [],
         "properties": {
           "elon_twitter": {
             "type": "string"
@@ -2448,9 +2771,8 @@
           }
         }
       },
-      "Core": {
+      "CoresFind": {
         "type": "object",
-        "required": [],
         "properties": {
           "asds_attempts": {
             "type": "integer",
@@ -2465,7 +2787,51 @@
             "format": "int32"
           },
           "id": {
+            "type": "string"
+          },
+          "missions": {
+            "type": "string"
+          },
+          "original_launch": {
             "type": "object"
+          },
+          "reuse_count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rtls_attempts": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "rtls_landings": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "string"
+          },
+          "water_landing": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Core": {
+        "type": "object",
+        "properties": {
+          "asds_attempts": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "asds_landings": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "block": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "id": {
+            "type": "string"
           },
           "missions": {
             "type": "array",
@@ -2496,54 +2862,8 @@
           }
         }
       },
-      "CoresFind": {
-        "type": "object",
-        "required": [],
-        "properties": {
-          "asds_attempts": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "asds_landings": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "block": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "id": {
-            "type": "string"
-          },
-          "missions": {
-            "type": "string"
-          },
-          "original_launch": {
-            "type": "object"
-          },
-          "reuse_count": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "rtls_attempts": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "rtls_landings": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "status": {
-            "type": "string"
-          },
-          "water_landing": {
-            "type": "boolean"
-          }
-        }
-      },
       "HistoryFind": {
         "type": "object",
-        "required": [],
         "properties": {
           "end": {
             "type": "object"
@@ -2553,7 +2873,7 @@
             "format": "int32"
           },
           "id": {
-            "type": "object"
+            "type": "string"
           },
           "start": {
             "type": "object"
@@ -2562,7 +2882,6 @@
       },
       "History": {
         "type": "object",
-        "required": [],
         "properties": {
           "details": {
             "type": "string"
@@ -2574,7 +2893,7 @@
             "type": "object"
           },
           "id": {
-            "type": "object"
+            "type": "string"
           },
           "links": {
             "$ref": "#/components/schemas/Link"
@@ -2589,7 +2908,6 @@
       },
       "Link": {
         "type": "object",
-        "required": [],
         "properties": {
           "article": {
             "type": "string"
@@ -2604,13 +2922,12 @@
       },
       "Launch": {
         "type": "object",
-        "required": [],
         "properties": {
           "details": {
             "type": "string"
           },
           "id": {
-            "type": "object"
+            "type": "string"
           },
           "is_tentative": {
             "type": "boolean"
@@ -2673,7 +2990,6 @@
       },
       "LaunchSite": {
         "type": "object",
-        "required": [],
         "properties": {
           "site_id": {
             "type": "string"
@@ -2688,7 +3004,6 @@
       },
       "LaunchLinks": {
         "type": "object",
-        "required": [],
         "properties": {
           "article_link": {
             "type": "string"
@@ -2730,7 +3045,6 @@
       },
       "LaunchRocket": {
         "type": "object",
-        "required": [],
         "properties": {
           "fairings": {
             "$ref": "#/components/schemas/LaunchRocketFairings"
@@ -2754,7 +3068,6 @@
       },
       "LaunchRocketFairings": {
         "type": "object",
-        "required": [],
         "properties": {
           "recovered": {
             "type": "boolean"
@@ -2772,7 +3085,6 @@
       },
       "LaunchRocketFirstStage": {
         "type": "object",
-        "required": [],
         "properties": {
           "cores": {
             "type": "array",
@@ -2784,7 +3096,6 @@
       },
       "LaunchRocketFirstStageCore": {
         "type": "object",
-        "required": [],
         "properties": {
           "block": {
             "type": "integer",
@@ -2822,7 +3133,6 @@
       },
       "Rocket": {
         "type": "object",
-        "required": [],
         "properties": {
           "active": {
             "type": "boolean"
@@ -2860,7 +3170,7 @@
             "$ref": "#/components/schemas/Distance"
           },
           "id": {
-            "type": "object"
+            "type": "string"
           },
           "landing_legs": {
             "$ref": "#/components/schemas/RocketLandingLegs"
@@ -2898,7 +3208,6 @@
       },
       "RocketEngines": {
         "type": "object",
-        "required": [],
         "properties": {
           "number": {
             "type": "integer",
@@ -2936,7 +3245,6 @@
       },
       "RocketFirstStage": {
         "type": "object",
-        "required": [],
         "properties": {
           "burn_time_sec": {
             "type": "integer",
@@ -2963,7 +3271,6 @@
       },
       "RocketLandingLegs": {
         "type": "object",
-        "required": [],
         "properties": {
           "number": {
             "type": "integer",
@@ -2976,7 +3283,6 @@
       },
       "RocketPayloadWeight": {
         "type": "object",
-        "required": [],
         "properties": {
           "id": {
             "type": "string"
@@ -2996,7 +3302,6 @@
       },
       "RocketSecondStage": {
         "type": "object",
-        "required": [],
         "properties": {
           "burn_time_sec": {
             "type": "integer",
@@ -3020,7 +3325,6 @@
       },
       "RocketSecondStagePayloads": {
         "type": "object",
-        "required": [],
         "properties": {
           "option_1": {
             "type": "string"
@@ -3032,7 +3336,6 @@
       },
       "RocketSecondStagePayloadCompositeFairing": {
         "type": "object",
-        "required": [],
         "properties": {
           "height": {
             "$ref": "#/components/schemas/Distance"
@@ -3044,7 +3347,6 @@
       },
       "LaunchRocketSecondStage": {
         "type": "object",
-        "required": [],
         "properties": {
           "block": {
             "type": "integer",
@@ -3060,7 +3362,6 @@
       },
       "Payload": {
         "type": "object",
-        "required": [],
         "properties": {
           "customers": {
             "type": "array",
@@ -3069,7 +3370,7 @@
             }
           },
           "id": {
-            "type": "object"
+            "type": "string"
           },
           "manufacturer": {
             "type": "string"
@@ -3108,7 +3409,6 @@
       },
       "PayloadOrbitParams": {
         "type": "object",
-        "required": [],
         "properties": {
           "apoapsis_km": {
             "type": "number",
@@ -3171,7 +3471,6 @@
       },
       "LaunchTelemetry": {
         "type": "object",
-        "required": [],
         "properties": {
           "flight_club": {
             "type": "string"
@@ -3180,7 +3479,6 @@
       },
       "Ship": {
         "type": "object",
-        "required": [],
         "properties": {
           "abs": {
             "type": "integer",
@@ -3205,7 +3503,7 @@
             "type": "string"
           },
           "id": {
-            "type": "object"
+            "type": "string"
           },
           "image": {
             "type": "string"
@@ -3272,7 +3570,6 @@
       },
       "ShipMission": {
         "type": "object",
-        "required": [],
         "properties": {
           "flight": {
             "type": "string"
@@ -3284,7 +3581,6 @@
       },
       "ShipLocation": {
         "type": "object",
-        "required": [],
         "properties": {
           "latitude": {
             "type": "number",
@@ -3298,7 +3594,6 @@
       },
       "HistoriesResult": {
         "type": "object",
-        "required": [],
         "properties": {
           "result": {
             "$ref": "#/components/schemas/Result"
@@ -3313,7 +3608,6 @@
       },
       "Result": {
         "type": "object",
-        "required": [],
         "properties": {
           "totalCount": {
             "type": "integer",
@@ -3323,7 +3617,6 @@
       },
       "Landpad": {
         "type": "object",
-        "required": [],
         "properties": {
           "attempted_landings": {
             "type": "string"
@@ -3335,7 +3628,7 @@
             "type": "string"
           },
           "id": {
-            "type": "object"
+            "type": "string"
           },
           "landing_type": {
             "type": "string"
@@ -3356,7 +3649,6 @@
       },
       "Location": {
         "type": "object",
-        "required": [],
         "properties": {
           "latitude": {
             "type": "number",
@@ -3376,7 +3668,6 @@
       },
       "LaunchFind": {
         "type": "object",
-        "required": [],
         "properties": {
           "apoapsis_km": {
             "type": "number",
@@ -3434,7 +3725,7 @@
             "type": "string"
           },
           "id": {
-            "type": "object"
+            "type": "string"
           },
           "inclination_deg": {
             "type": "number",
@@ -3575,7 +3866,6 @@
       },
       "LaunchesPastResult": {
         "type": "object",
-        "required": [],
         "properties": {
           "result": {
             "$ref": "#/components/schemas/Result"
@@ -3590,7 +3880,6 @@
       },
       "Launchpad": {
         "type": "object",
-        "required": [],
         "properties": {
           "attempted_launches": {
             "type": "integer",
@@ -3600,7 +3889,7 @@
             "type": "string"
           },
           "id": {
-            "type": "object"
+            "type": "string"
           },
           "location": {
             "$ref": "#/components/schemas/Location"
@@ -3626,15 +3915,31 @@
           }
         }
       },
+      "MissionsFind": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "manufacturer": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "payload_id": {
+            "type": "string"
+          }
+        }
+      },
       "Mission": {
         "type": "object",
-        "required": [],
         "properties": {
           "description": {
             "type": "string"
           },
           "id": {
-            "type": "object"
+            "type": "string"
           },
           "manufacturers": {
             "type": "array",
@@ -3662,27 +3967,8 @@
           }
         }
       },
-      "MissionsFind": {
-        "type": "object",
-        "required": [],
-        "properties": {
-          "id": {
-            "type": "object"
-          },
-          "manufacturer": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          },
-          "payload_id": {
-            "type": "string"
-          }
-        }
-      },
       "MissionResult": {
         "type": "object",
-        "required": [],
         "properties": {
           "result": {
             "$ref": "#/components/schemas/Result"
@@ -3697,7 +3983,6 @@
       },
       "PayloadsFind": {
         "type": "object",
-        "required": [],
         "properties": {
           "apoapsis_km": {
             "type": "number",
@@ -3743,7 +4028,7 @@
             "type": "string"
           },
           "payload_id": {
-            "type": "object"
+            "type": "string"
           },
           "payload_type": {
             "type": "string"
@@ -3777,7 +4062,6 @@
       },
       "Roadster": {
         "type": "object",
-        "required": [],
         "properties": {
           "apoapsis_au": {
             "type": "number",
@@ -3874,7 +4158,6 @@
       },
       "RocketsResult": {
         "type": "object",
-        "required": [],
         "properties": {
           "result": {
             "$ref": "#/components/schemas/Result"
@@ -3889,10 +4172,9 @@
       },
       "ShipsFind": {
         "type": "object",
-        "required": [],
         "properties": {
           "id": {
-            "type": "object"
+            "type": "string"
           },
           "name": {
             "type": "string"
@@ -3974,7 +4256,6 @@
       },
       "ShipsResult": {
         "type": "object",
-        "required": [],
         "properties": {
           "result": {
             "$ref": "#/components/schemas/Result"
@@ -3987,341 +4268,47 @@
           }
         }
       },
-      "users_select_column": {
-        "type": "object",
-        "required": [],
-        "properties": {
-          "id": {
-            "type": "object"
-          },
-          "name": {
-            "type": "object"
-          },
-          "rocket": {
-            "type": "object"
-          },
-          "timestamp": {
-            "type": "object"
-          },
-          "twitter": {
-            "type": "object"
-          }
-        }
-      },
-      "users_order_by": {
-        "type": "object",
-        "required": [],
-        "properties": {
-          "id": {
-            "type": "object"
-          },
-          "name": {
-            "type": "object"
-          },
-          "rocket": {
-            "type": "object"
-          },
-          "timestamp": {
-            "type": "object"
-          },
-          "twitter": {
-            "type": "object"
-          }
-        }
-      },
-      "users_bool_exp": {
-        "type": "object",
-        "required": [],
-        "properties": {
-          "_and": {
-            "type": "array",
-            "items": {
-              "type": "object"
-            }
-          },
-          "_not": {
-            "type": "object"
-          },
-          "_or": {
-            "type": "array",
-            "items": {
-              "type": "object"
-            }
-          },
-          "id": {
-            "type": "object"
-          },
-          "name": {
-            "type": "object"
-          },
-          "rocket": {
-            "type": "object"
-          },
-          "timestamp": {
-            "type": "object"
-          },
-          "twitter": {
-            "type": "object"
-          }
-        }
-      },
-      "uuid_comparison_exp": {
-        "type": "object",
-        "required": [],
-        "properties": {
-          "_eq": {
-            "type": "object"
-          },
-          "_gt": {
-            "type": "object"
-          },
-          "_gte": {
-            "type": "object"
-          },
-          "_in": {
-            "type": "array",
-            "items": {
-              "type": "object"
-            }
-          },
-          "_is_null": {
-            "type": "boolean"
-          },
-          "_lt": {
-            "type": "object"
-          },
-          "_lte": {
-            "type": "object"
-          },
-          "_neq": {
-            "type": "object"
-          },
-          "_nin": {
-            "type": "array",
-            "items": {
-              "type": "object"
-            }
-          }
-        }
-      },
-      "String_comparison_exp": {
-        "type": "object",
-        "required": [],
-        "properties": {
-          "_eq": {
-            "type": "string"
-          },
-          "_gt": {
-            "type": "string"
-          },
-          "_gte": {
-            "type": "string"
-          },
-          "_ilike": {
-            "type": "string"
-          },
-          "_in": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "_is_null": {
-            "type": "boolean"
-          },
-          "_like": {
-            "type": "string"
-          },
-          "_lt": {
-            "type": "string"
-          },
-          "_lte": {
-            "type": "string"
-          },
-          "_neq": {
-            "type": "string"
-          },
-          "_nilike": {
-            "type": "string"
-          },
-          "_nin": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "_nlike": {
-            "type": "string"
-          },
-          "_nsimilar": {
-            "type": "string"
-          },
-          "_similar": {
-            "type": "string"
-          }
-        }
-      },
-      "timestamptz_comparison_exp": {
-        "type": "object",
-        "required": [],
-        "properties": {
-          "_eq": {
-            "type": "object"
-          },
-          "_gt": {
-            "type": "object"
-          },
-          "_gte": {
-            "type": "object"
-          },
-          "_in": {
-            "type": "array",
-            "items": {
-              "type": "object"
-            }
-          },
-          "_is_null": {
-            "type": "boolean"
-          },
-          "_lt": {
-            "type": "object"
-          },
-          "_lte": {
-            "type": "object"
-          },
-          "_neq": {
-            "type": "object"
-          },
-          "_nin": {
-            "type": "array",
-            "items": {
-              "type": "object"
-            }
-          }
-        }
-      },
-      "users": {
-        "type": "object",
-        "required": ["id", "timestamp"],
-        "properties": {
-          "id": {
-            "type": "object"
-          },
-          "name": {
-            "type": "string"
-          },
-          "rocket": {
-            "type": "string"
-          },
-          "timestamp": {
-            "type": "object"
-          },
-          "twitter": {
-            "type": "string"
-          }
-        }
-      },
-      "users_aggregate": {
-        "type": "object",
-        "required": ["nodes"],
-        "properties": {
-          "aggregate": {
-            "$ref": "#/components/schemas/users_aggregate_fields"
-          },
-          "nodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/users"
-            }
-          }
-        }
-      },
-      "users_aggregate_fields": {
-        "type": "object",
-        "required": [],
-        "properties": {
-          "count": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "max": {
-            "$ref": "#/components/schemas/users_max_fields"
-          },
-          "min": {
-            "$ref": "#/components/schemas/users_min_fields"
-          }
-        }
-      },
-      "users_max_fields": {
-        "type": "object",
-        "required": [],
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "rocket": {
-            "type": "string"
-          },
-          "timestamp": {
-            "type": "object"
-          },
-          "twitter": {
-            "type": "string"
-          }
-        }
-      },
-      "users_min_fields": {
-        "type": "object",
-        "required": [],
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "rocket": {
-            "type": "string"
-          },
-          "timestamp": {
-            "type": "object"
-          },
-          "twitter": {
-            "type": "string"
-          }
-        }
-      },
       "Mutation": {
         "type": "object",
-        "required": [],
         "properties": {
           "delete_users": {
-            "$ref": "#/components/schemas/users_mutation_response"
+            "$ref": "#/components/schemas/users_mutation_response",
+            "description": "delete data from the table: \"users\""
           },
           "insert_users": {
-            "$ref": "#/components/schemas/users_mutation_response"
+            "$ref": "#/components/schemas/users_mutation_response",
+            "description": "insert data into the table: \"users\""
           },
           "update_users": {
-            "$ref": "#/components/schemas/users_mutation_response"
+            "$ref": "#/components/schemas/users_mutation_response",
+            "description": "update data of the table: \"users\""
           }
         }
       },
       "users_mutation_response": {
         "type": "object",
-        "required": ["affected_rows", "returning"],
+        "required": [
+          "affected_rows",
+          "returning"
+        ],
         "properties": {
           "affected_rows": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "description": "number of affected rows by the mutation"
           },
           "returning": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/users"
-            }
+            },
+            "description": "data of the affected rows by the mutation"
           }
-        }
+        },
+        "description": "response of any mutation on the table \"users\""
       },
       "users_insert_input": {
         "type": "object",
-        "required": [],
         "properties": {
           "id": {
             "type": "object"
@@ -4338,11 +4325,15 @@
           "twitter": {
             "type": "string"
           }
-        }
+        },
+        "description": "input type for inserting data into table \"users\""
       },
       "users_on_conflict": {
         "type": "object",
-        "required": ["constraint", "update_columns"],
+        "required": [
+          "constraint",
+          "update_columns"
+        ],
         "properties": {
           "constraint": {
             "type": "object"
@@ -4353,11 +4344,11 @@
               "type": "object"
             }
           }
-        }
+        },
+        "description": "on conflict condition type for table \"users\""
       },
       "users_set_input": {
         "type": "object",
-        "required": [],
         "properties": {
           "id": {
             "type": "object"
@@ -4374,29 +4365,35 @@
           "twitter": {
             "type": "string"
           }
-        }
+        },
+        "description": "input type for updating data in table \"users\""
       },
       "Subscription": {
         "type": "object",
-        "required": ["users", "users_aggregate"],
+        "required": [
+          "users",
+          "users_aggregate"
+        ],
         "properties": {
           "users": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/users"
-            }
+            },
+            "description": "fetch data from the table: \"users\""
           },
           "users_aggregate": {
-            "$ref": "#/components/schemas/users_aggregate"
+            "$ref": "#/components/schemas/users_aggregate",
+            "description": "fetch aggregated fields from the table: \"users\""
           },
           "users_by_pk": {
-            "$ref": "#/components/schemas/users"
+            "$ref": "#/components/schemas/users",
+            "description": "fetch data from the table: \"users\" using primary key columns"
           }
         }
       },
       "CoreMission": {
         "type": "object",
-        "required": [],
         "properties": {
           "name": {
             "type": "string"
@@ -4409,7 +4406,6 @@
       },
       "users_aggregate_order_by": {
         "type": "object",
-        "required": [],
         "properties": {
           "count": {
             "type": "object"
@@ -4420,11 +4416,11 @@
           "min": {
             "type": "object"
           }
-        }
+        },
+        "description": "order by aggregate values of table \"users\""
       },
       "users_max_order_by": {
         "type": "object",
-        "required": [],
         "properties": {
           "name": {
             "type": "object"
@@ -4438,11 +4434,11 @@
           "twitter": {
             "type": "object"
           }
-        }
+        },
+        "description": "order by max() on columns of table \"users\""
       },
       "users_min_order_by": {
         "type": "object",
-        "required": [],
         "properties": {
           "name": {
             "type": "object"
@@ -4456,11 +4452,14 @@
           "twitter": {
             "type": "object"
           }
-        }
+        },
+        "description": "order by min() on columns of table \"users\""
       },
       "users_arr_rel_insert_input": {
         "type": "object",
-        "required": ["data"],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "array",
@@ -4471,11 +4470,14 @@
           "on_conflict": {
             "type": "object"
           }
-        }
+        },
+        "description": "input type for inserting array relation for remote table \"users\""
       },
       "users_obj_rel_insert_input": {
         "type": "object",
-        "required": ["data"],
+        "required": [
+          "data"
+        ],
         "properties": {
           "data": {
             "type": "object"
@@ -4483,7 +4485,8 @@
           "on_conflict": {
             "type": "object"
           }
-        }
+        },
+        "description": "input type for inserting object relation for remote table \"users\""
       }
     }
   }

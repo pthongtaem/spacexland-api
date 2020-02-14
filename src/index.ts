@@ -1,10 +1,10 @@
-require("dotenv").config();
-import express from "express";
-import { getDB } from "./context/db";
-import getSchema from "./schema";
-import context from "./context";
-import graphql from "./servers/graphql";
-import rest from "./servers/rest";
+require('dotenv').config();
+import express from 'express';
+import { getDB } from './context/db';
+import getSchema from './schema';
+import context from './context';
+import graphql from './servers/graphql';
+import rest from './servers/rest';
 
 (async () => {
   const port = process.env.PORT || 4000;
@@ -14,7 +14,7 @@ import rest from "./servers/rest";
 
   const config = {
     schema,
-    context: { ...context, db }
+    context: { ...context, db },
   };
 
   graphql(app, config);

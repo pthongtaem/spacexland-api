@@ -1378,24 +1378,24 @@ import {
 
 import { MyContext } from "./context";
 
-export type Resolver<Result, Parent = {}, Context = {}, Args = {}> = (
+export type Resolver<Result, Parent = {}, TContext = {}, Args = {}> = (
   parent: Parent,
   args: Args,
-  context: Context,
+  context: TContext,
   info: GraphQLResolveInfo
 ) => Promise<Result> | Result;
 
-export interface ISubscriptionResolverObject<Result, Parent, Context, Args> {
+export interface ISubscriptionResolverObject<Result, Parent, TContext, Args> {
   subscribe<R = Result, P = Parent>(
     parent: P,
     args: Args,
-    context: Context,
+    context: TContext,
     info: GraphQLResolveInfo
   ): AsyncIterator<R | Result> | Promise<AsyncIterator<R | Result>>;
   resolve?<R = Result, P = Parent>(
     parent: P,
     args: Args,
-    context: Context,
+    context: TContext,
     info: GraphQLResolveInfo
   ): R | Result | Promise<R | Result>;
 }
@@ -1403,17 +1403,17 @@ export interface ISubscriptionResolverObject<Result, Parent, Context, Args> {
 export type SubscriptionResolver<
   Result,
   Parent = {},
-  Context = {},
+  TContext = {},
   Args = {}
 > =
   | ((
       ...args: any[]
-    ) => ISubscriptionResolverObject<Result, Parent, Context, Args>)
-  | ISubscriptionResolverObject<Result, Parent, Context, Args>;
+    ) => ISubscriptionResolverObject<Result, Parent, TContext, Args>)
+  | ISubscriptionResolverObject<Result, Parent, TContext, Args>;
 
-export type TypeResolveFn<Types, Parent = {}, Context = {}> = (
+export type TypeResolveFn<Types, Parent = {}, TContext = {}> = (
   parent: Parent,
-  context: Context,
+  context: TContext,
   info: GraphQLResolveInfo
 ) => Maybe<Types>;
 
@@ -1428,131 +1428,147 @@ export type DirectiveResolverFn<TResult, TArgs = {}, TContext = {}> = (
 ) => TResult | Promise<TResult>;
 
 export namespace QueryResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = {}> {
-    capsules?: CapsulesResolver<Maybe<(Maybe<Capsule>)[]>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = {}> {
+    capsules?: CapsulesResolver<
+      Maybe<(Maybe<Capsule>)[]>,
+      TypeParent,
+      TContext
+    >;
 
     capsulesPast?: CapsulesPastResolver<
       Maybe<(Maybe<Capsule>)[]>,
       TypeParent,
-      Context
+      TContext
     >;
 
     capsulesUpcoming?: CapsulesUpcomingResolver<
       Maybe<(Maybe<Capsule>)[]>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    capsule?: CapsuleResolver<Maybe<Capsule>, TypeParent, Context>;
+    capsule?: CapsuleResolver<Maybe<Capsule>, TypeParent, TContext>;
 
-    company?: CompanyResolver<Maybe<Info>, TypeParent, Context>;
+    company?: CompanyResolver<Maybe<Info>, TypeParent, TContext>;
 
-    cores?: CoresResolver<Maybe<(Maybe<Core>)[]>, TypeParent, Context>;
+    cores?: CoresResolver<Maybe<(Maybe<Core>)[]>, TypeParent, TContext>;
 
-    coresPast?: CoresPastResolver<Maybe<(Maybe<Core>)[]>, TypeParent, Context>;
+    coresPast?: CoresPastResolver<Maybe<(Maybe<Core>)[]>, TypeParent, TContext>;
 
     coresUpcoming?: CoresUpcomingResolver<
       Maybe<(Maybe<Core>)[]>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    core?: CoreResolver<Maybe<Core>, TypeParent, Context>;
+    core?: CoreResolver<Maybe<Core>, TypeParent, TContext>;
 
-    dragons?: DragonsResolver<Maybe<(Maybe<Dragon>)[]>, TypeParent, Context>;
+    dragons?: DragonsResolver<Maybe<(Maybe<Dragon>)[]>, TypeParent, TContext>;
 
-    dragon?: DragonResolver<Maybe<Dragon>, TypeParent, Context>;
+    dragon?: DragonResolver<Maybe<Dragon>, TypeParent, TContext>;
 
     histories?: HistoriesResolver<
       Maybe<(Maybe<History>)[]>,
       TypeParent,
-      Context
+      TContext
     >;
 
     historiesResult?: HistoriesResultResolver<
       Maybe<HistoriesResult>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    history?: HistoryResolver<Maybe<History>, TypeParent, Context>;
+    history?: HistoryResolver<Maybe<History>, TypeParent, TContext>;
 
-    landpads?: LandpadsResolver<Maybe<(Maybe<Landpad>)[]>, TypeParent, Context>;
+    landpads?: LandpadsResolver<
+      Maybe<(Maybe<Landpad>)[]>,
+      TypeParent,
+      TContext
+    >;
 
-    landpad?: LandpadResolver<Maybe<Landpad>, TypeParent, Context>;
+    landpad?: LandpadResolver<Maybe<Landpad>, TypeParent, TContext>;
 
-    launches?: LaunchesResolver<Maybe<(Maybe<Launch>)[]>, TypeParent, Context>;
+    launches?: LaunchesResolver<Maybe<(Maybe<Launch>)[]>, TypeParent, TContext>;
 
     launchesPast?: LaunchesPastResolver<
       Maybe<(Maybe<Launch>)[]>,
       TypeParent,
-      Context
+      TContext
     >;
 
     launchesPastResult?: LaunchesPastResultResolver<
       Maybe<LaunchesPastResult>,
       TypeParent,
-      Context
+      TContext
     >;
 
     launchesUpcoming?: LaunchesUpcomingResolver<
       Maybe<(Maybe<Launch>)[]>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    launch?: LaunchResolver<Maybe<Launch>, TypeParent, Context>;
+    launch?: LaunchResolver<Maybe<Launch>, TypeParent, TContext>;
 
-    launchLatest?: LaunchLatestResolver<Maybe<Launch>, TypeParent, Context>;
+    launchLatest?: LaunchLatestResolver<Maybe<Launch>, TypeParent, TContext>;
 
-    launchNext?: LaunchNextResolver<Maybe<Launch>, TypeParent, Context>;
+    launchNext?: LaunchNextResolver<Maybe<Launch>, TypeParent, TContext>;
 
     launchpads?: LaunchpadsResolver<
       Maybe<(Maybe<Launchpad>)[]>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    launchpad?: LaunchpadResolver<Maybe<Launchpad>, TypeParent, Context>;
+    launchpad?: LaunchpadResolver<Maybe<Launchpad>, TypeParent, TContext>;
 
-    missions?: MissionsResolver<Maybe<(Maybe<Mission>)[]>, TypeParent, Context>;
+    missions?: MissionsResolver<
+      Maybe<(Maybe<Mission>)[]>,
+      TypeParent,
+      TContext
+    >;
 
     missionsResult?: MissionsResultResolver<
       Maybe<MissionResult>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    mission?: MissionResolver<Maybe<Mission>, TypeParent, Context>;
+    mission?: MissionResolver<Maybe<Mission>, TypeParent, TContext>;
 
-    payloads?: PayloadsResolver<Maybe<(Maybe<Payload>)[]>, TypeParent, Context>;
+    payloads?: PayloadsResolver<
+      Maybe<(Maybe<Payload>)[]>,
+      TypeParent,
+      TContext
+    >;
 
-    payload?: PayloadResolver<Maybe<Payload>, TypeParent, Context>;
+    payload?: PayloadResolver<Maybe<Payload>, TypeParent, TContext>;
 
-    roadster?: RoadsterResolver<Maybe<Roadster>, TypeParent, Context>;
+    roadster?: RoadsterResolver<Maybe<Roadster>, TypeParent, TContext>;
 
-    rockets?: RocketsResolver<Maybe<(Maybe<Rocket>)[]>, TypeParent, Context>;
+    rockets?: RocketsResolver<Maybe<(Maybe<Rocket>)[]>, TypeParent, TContext>;
 
     rocketsResult?: RocketsResultResolver<
       Maybe<RocketsResult>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    rocket?: RocketResolver<Maybe<Rocket>, TypeParent, Context>;
+    rocket?: RocketResolver<Maybe<Rocket>, TypeParent, TContext>;
 
-    ships?: ShipsResolver<Maybe<(Maybe<Ship>)[]>, TypeParent, Context>;
+    ships?: ShipsResolver<Maybe<(Maybe<Ship>)[]>, TypeParent, TContext>;
 
-    shipsResult?: ShipsResultResolver<Maybe<ShipsResult>, TypeParent, Context>;
+    shipsResult?: ShipsResultResolver<Maybe<ShipsResult>, TypeParent, TContext>;
 
-    ship?: ShipResolver<Maybe<Ship>, TypeParent, Context>;
+    ship?: ShipResolver<Maybe<Ship>, TypeParent, TContext>;
   }
 
   export type CapsulesResolver<
     R = Maybe<(Maybe<Capsule>)[]>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, CapsulesArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, CapsulesArgs>;
   export interface CapsulesArgs {
     find?: Maybe<CapsulesFind>;
 
@@ -1568,8 +1584,8 @@ export namespace QueryResolvers {
   export type CapsulesPastResolver<
     R = Maybe<(Maybe<Capsule>)[]>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, CapsulesPastArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, CapsulesPastArgs>;
   export interface CapsulesPastArgs {
     find?: Maybe<CapsulesFind>;
 
@@ -1585,8 +1601,8 @@ export namespace QueryResolvers {
   export type CapsulesUpcomingResolver<
     R = Maybe<(Maybe<Capsule>)[]>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, CapsulesUpcomingArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, CapsulesUpcomingArgs>;
   export interface CapsulesUpcomingArgs {
     find?: Maybe<CapsulesFind>;
 
@@ -1602,8 +1618,8 @@ export namespace QueryResolvers {
   export type CapsuleResolver<
     R = Maybe<Capsule>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, CapsuleArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, CapsuleArgs>;
   export interface CapsuleArgs {
     id: string;
   }
@@ -1611,13 +1627,13 @@ export namespace QueryResolvers {
   export type CompanyResolver<
     R = Maybe<Info>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type CoresResolver<
     R = Maybe<(Maybe<Core>)[]>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, CoresArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, CoresArgs>;
   export interface CoresArgs {
     find?: Maybe<CoresFind>;
 
@@ -1633,8 +1649,8 @@ export namespace QueryResolvers {
   export type CoresPastResolver<
     R = Maybe<(Maybe<Core>)[]>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, CoresPastArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, CoresPastArgs>;
   export interface CoresPastArgs {
     find?: Maybe<CoresFind>;
 
@@ -1650,8 +1666,8 @@ export namespace QueryResolvers {
   export type CoresUpcomingResolver<
     R = Maybe<(Maybe<Core>)[]>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, CoresUpcomingArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, CoresUpcomingArgs>;
   export interface CoresUpcomingArgs {
     find?: Maybe<CoresFind>;
 
@@ -1667,8 +1683,8 @@ export namespace QueryResolvers {
   export type CoreResolver<
     R = Maybe<Core>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, CoreArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, CoreArgs>;
   export interface CoreArgs {
     id: string;
   }
@@ -1676,8 +1692,8 @@ export namespace QueryResolvers {
   export type DragonsResolver<
     R = Maybe<(Maybe<Dragon>)[]>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, DragonsArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, DragonsArgs>;
   export interface DragonsArgs {
     limit?: Maybe<number>;
 
@@ -1687,8 +1703,8 @@ export namespace QueryResolvers {
   export type DragonResolver<
     R = Maybe<Dragon>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, DragonArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, DragonArgs>;
   export interface DragonArgs {
     id: string;
   }
@@ -1696,8 +1712,8 @@ export namespace QueryResolvers {
   export type HistoriesResolver<
     R = Maybe<(Maybe<History>)[]>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, HistoriesArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, HistoriesArgs>;
   export interface HistoriesArgs {
     find?: Maybe<HistoryFind>;
 
@@ -1713,8 +1729,8 @@ export namespace QueryResolvers {
   export type HistoriesResultResolver<
     R = Maybe<HistoriesResult>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, HistoriesResultArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, HistoriesResultArgs>;
   export interface HistoriesResultArgs {
     find?: Maybe<HistoryFind>;
 
@@ -1730,8 +1746,8 @@ export namespace QueryResolvers {
   export type HistoryResolver<
     R = Maybe<History>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, HistoryArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, HistoryArgs>;
   export interface HistoryArgs {
     id: string;
   }
@@ -1739,8 +1755,8 @@ export namespace QueryResolvers {
   export type LandpadsResolver<
     R = Maybe<(Maybe<Landpad>)[]>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, LandpadsArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, LandpadsArgs>;
   export interface LandpadsArgs {
     limit?: Maybe<number>;
 
@@ -1750,8 +1766,8 @@ export namespace QueryResolvers {
   export type LandpadResolver<
     R = Maybe<Landpad>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, LandpadArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, LandpadArgs>;
   export interface LandpadArgs {
     id: string;
   }
@@ -1759,8 +1775,8 @@ export namespace QueryResolvers {
   export type LaunchesResolver<
     R = Maybe<(Maybe<Launch>)[]>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, LaunchesArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, LaunchesArgs>;
   export interface LaunchesArgs {
     find?: Maybe<LaunchFind>;
 
@@ -1776,8 +1792,8 @@ export namespace QueryResolvers {
   export type LaunchesPastResolver<
     R = Maybe<(Maybe<Launch>)[]>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, LaunchesPastArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, LaunchesPastArgs>;
   export interface LaunchesPastArgs {
     find?: Maybe<LaunchFind>;
 
@@ -1793,8 +1809,8 @@ export namespace QueryResolvers {
   export type LaunchesPastResultResolver<
     R = Maybe<LaunchesPastResult>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, LaunchesPastResultArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, LaunchesPastResultArgs>;
   export interface LaunchesPastResultArgs {
     find?: Maybe<LaunchFind>;
 
@@ -1810,8 +1826,8 @@ export namespace QueryResolvers {
   export type LaunchesUpcomingResolver<
     R = Maybe<(Maybe<Launch>)[]>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, LaunchesUpcomingArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, LaunchesUpcomingArgs>;
   export interface LaunchesUpcomingArgs {
     find?: Maybe<LaunchFind>;
 
@@ -1827,8 +1843,8 @@ export namespace QueryResolvers {
   export type LaunchResolver<
     R = Maybe<Launch>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, LaunchArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, LaunchArgs>;
   export interface LaunchArgs {
     id: string;
   }
@@ -1836,8 +1852,8 @@ export namespace QueryResolvers {
   export type LaunchLatestResolver<
     R = Maybe<Launch>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, LaunchLatestArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, LaunchLatestArgs>;
   export interface LaunchLatestArgs {
     offset?: Maybe<number>;
   }
@@ -1845,8 +1861,8 @@ export namespace QueryResolvers {
   export type LaunchNextResolver<
     R = Maybe<Launch>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, LaunchNextArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, LaunchNextArgs>;
   export interface LaunchNextArgs {
     offset?: Maybe<number>;
   }
@@ -1854,8 +1870,8 @@ export namespace QueryResolvers {
   export type LaunchpadsResolver<
     R = Maybe<(Maybe<Launchpad>)[]>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, LaunchpadsArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, LaunchpadsArgs>;
   export interface LaunchpadsArgs {
     limit?: Maybe<number>;
 
@@ -1865,8 +1881,8 @@ export namespace QueryResolvers {
   export type LaunchpadResolver<
     R = Maybe<Launchpad>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, LaunchpadArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, LaunchpadArgs>;
   export interface LaunchpadArgs {
     id: string;
   }
@@ -1874,8 +1890,8 @@ export namespace QueryResolvers {
   export type MissionsResolver<
     R = Maybe<(Maybe<Mission>)[]>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, MissionsArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, MissionsArgs>;
   export interface MissionsArgs {
     find?: Maybe<MissionsFind>;
 
@@ -1887,8 +1903,8 @@ export namespace QueryResolvers {
   export type MissionsResultResolver<
     R = Maybe<MissionResult>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, MissionsResultArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, MissionsResultArgs>;
   export interface MissionsResultArgs {
     find?: Maybe<MissionsFind>;
 
@@ -1900,8 +1916,8 @@ export namespace QueryResolvers {
   export type MissionResolver<
     R = Maybe<Mission>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, MissionArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, MissionArgs>;
   export interface MissionArgs {
     id: string;
   }
@@ -1909,8 +1925,8 @@ export namespace QueryResolvers {
   export type PayloadsResolver<
     R = Maybe<(Maybe<Payload>)[]>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, PayloadsArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, PayloadsArgs>;
   export interface PayloadsArgs {
     find?: Maybe<PayloadsFind>;
 
@@ -1926,8 +1942,8 @@ export namespace QueryResolvers {
   export type PayloadResolver<
     R = Maybe<Payload>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, PayloadArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, PayloadArgs>;
   export interface PayloadArgs {
     id: string;
   }
@@ -1935,13 +1951,13 @@ export namespace QueryResolvers {
   export type RoadsterResolver<
     R = Maybe<Roadster>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type RocketsResolver<
     R = Maybe<(Maybe<Rocket>)[]>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, RocketsArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, RocketsArgs>;
   export interface RocketsArgs {
     limit?: Maybe<number>;
 
@@ -1951,8 +1967,8 @@ export namespace QueryResolvers {
   export type RocketsResultResolver<
     R = Maybe<RocketsResult>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, RocketsResultArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, RocketsResultArgs>;
   export interface RocketsResultArgs {
     limit?: Maybe<number>;
 
@@ -1962,8 +1978,8 @@ export namespace QueryResolvers {
   export type RocketResolver<
     R = Maybe<Rocket>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, RocketArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, RocketArgs>;
   export interface RocketArgs {
     id: string;
   }
@@ -1971,8 +1987,8 @@ export namespace QueryResolvers {
   export type ShipsResolver<
     R = Maybe<(Maybe<Ship>)[]>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, ShipsArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, ShipsArgs>;
   export interface ShipsArgs {
     find?: Maybe<ShipsFind>;
 
@@ -1988,8 +2004,8 @@ export namespace QueryResolvers {
   export type ShipsResultResolver<
     R = Maybe<ShipsResult>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, ShipsResultArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, ShipsResultArgs>;
   export interface ShipsResultArgs {
     find?: Maybe<ShipsFind>;
 
@@ -2005,2859 +2021,2906 @@ export namespace QueryResolvers {
   export type ShipResolver<
     R = Maybe<Ship>,
     Parent = {},
-    Context = MyContext
-  > = Resolver<R, Parent, Context, ShipArgs>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext, ShipArgs>;
   export interface ShipArgs {
     id: string;
   }
 }
 
 export namespace CapsuleResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Capsule> {
-    id?: IdResolver<Maybe<string>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = Capsule> {
+    id?: IdResolver<Maybe<string>, TypeParent, TContext>;
 
-    landings?: LandingsResolver<Maybe<number>, TypeParent, Context>;
+    landings?: LandingsResolver<Maybe<number>, TypeParent, TContext>;
 
     missions?: MissionsResolver<
       Maybe<(Maybe<CapsuleMission>)[]>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    original_launch?: OriginalLaunchResolver<Maybe<Date>, TypeParent, Context>;
+    original_launch?: OriginalLaunchResolver<Maybe<Date>, TypeParent, TContext>;
 
-    reuse_count?: ReuseCountResolver<Maybe<number>, TypeParent, Context>;
+    reuse_count?: ReuseCountResolver<Maybe<number>, TypeParent, TContext>;
 
-    status?: StatusResolver<Maybe<string>, TypeParent, Context>;
+    status?: StatusResolver<Maybe<string>, TypeParent, TContext>;
 
-    type?: TypeResolver<Maybe<string>, TypeParent, Context>;
+    type?: TypeResolver<Maybe<string>, TypeParent, TContext>;
 
-    dragon?: DragonResolver<Maybe<Dragon>, TypeParent, Context>;
+    dragon?: DragonResolver<Maybe<Dragon>, TypeParent, TContext>;
   }
 
   export type IdResolver<
     R = Maybe<string>,
     Parent = Capsule,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LandingsResolver<
     R = Maybe<number>,
     Parent = Capsule,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type MissionsResolver<
     R = Maybe<(Maybe<CapsuleMission>)[]>,
     Parent = Capsule,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type OriginalLaunchResolver<
     R = Maybe<Date>,
     Parent = Capsule,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ReuseCountResolver<
     R = Maybe<number>,
     Parent = Capsule,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type StatusResolver<
     R = Maybe<string>,
     Parent = Capsule,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type TypeResolver<
     R = Maybe<string>,
     Parent = Capsule,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type DragonResolver<
     R = Maybe<Dragon>,
     Parent = Capsule,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace CapsuleMissionResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = CapsuleMission> {
-    flight?: FlightResolver<Maybe<number>, TypeParent, Context>;
+  export interface Resolvers<
+    TContext = MyContext,
+    TypeParent = CapsuleMission
+  > {
+    flight?: FlightResolver<Maybe<number>, TypeParent, TContext>;
 
-    name?: NameResolver<Maybe<string>, TypeParent, Context>;
+    name?: NameResolver<Maybe<string>, TypeParent, TContext>;
   }
 
   export type FlightResolver<
     R = Maybe<number>,
     Parent = CapsuleMission,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type NameResolver<
     R = Maybe<string>,
     Parent = CapsuleMission,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace DragonResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Dragon> {
-    active?: ActiveResolver<Maybe<boolean>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = Dragon> {
+    active?: ActiveResolver<Maybe<boolean>, TypeParent, TContext>;
 
-    crew_capacity?: CrewCapacityResolver<Maybe<number>, TypeParent, Context>;
+    crew_capacity?: CrewCapacityResolver<Maybe<number>, TypeParent, TContext>;
 
-    description?: DescriptionResolver<Maybe<string>, TypeParent, Context>;
+    description?: DescriptionResolver<Maybe<string>, TypeParent, TContext>;
 
-    diameter?: DiameterResolver<Maybe<Distance>, TypeParent, Context>;
+    diameter?: DiameterResolver<Maybe<Distance>, TypeParent, TContext>;
 
-    dry_mass_kg?: DryMassKgResolver<Maybe<number>, TypeParent, Context>;
+    dry_mass_kg?: DryMassKgResolver<Maybe<number>, TypeParent, TContext>;
 
-    dry_mass_lb?: DryMassLbResolver<Maybe<number>, TypeParent, Context>;
+    dry_mass_lb?: DryMassLbResolver<Maybe<number>, TypeParent, TContext>;
 
-    first_flight?: FirstFlightResolver<Maybe<string>, TypeParent, Context>;
+    first_flight?: FirstFlightResolver<Maybe<string>, TypeParent, TContext>;
 
     heat_shield?: HeatShieldResolver<
       Maybe<DragonHeatShield>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    height_w_trunk?: HeightWTrunkResolver<Maybe<Distance>, TypeParent, Context>;
+    height_w_trunk?: HeightWTrunkResolver<
+      Maybe<Distance>,
+      TypeParent,
+      TContext
+    >;
 
-    id?: IdResolver<Maybe<string>, TypeParent, Context>;
+    id?: IdResolver<Maybe<string>, TypeParent, TContext>;
 
     launch_payload_mass?: LaunchPayloadMassResolver<
       Maybe<Mass>,
       TypeParent,
-      Context
+      TContext
     >;
 
     launch_payload_vol?: LaunchPayloadVolResolver<
       Maybe<Volume>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    name?: NameResolver<Maybe<string>, TypeParent, Context>;
+    name?: NameResolver<Maybe<string>, TypeParent, TContext>;
 
     orbit_duration_yr?: OrbitDurationYrResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
 
     pressurized_capsule?: PressurizedCapsuleResolver<
       Maybe<DragonPressurizedCapsule>,
       TypeParent,
-      Context
+      TContext
     >;
 
     return_payload_mass?: ReturnPayloadMassResolver<
       Maybe<Mass>,
       TypeParent,
-      Context
+      TContext
     >;
 
     return_payload_vol?: ReturnPayloadVolResolver<
       Maybe<Volume>,
       TypeParent,
-      Context
+      TContext
     >;
 
     sidewall_angle_deg?: SidewallAngleDegResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
 
     thrusters?: ThrustersResolver<
       Maybe<(Maybe<DragonThrust>)[]>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    trunk?: TrunkResolver<Maybe<DragonTrunk>, TypeParent, Context>;
+    trunk?: TrunkResolver<Maybe<DragonTrunk>, TypeParent, TContext>;
 
-    type?: TypeResolver<Maybe<string>, TypeParent, Context>;
+    type?: TypeResolver<Maybe<string>, TypeParent, TContext>;
 
-    wikipedia?: WikipediaResolver<Maybe<string>, TypeParent, Context>;
+    wikipedia?: WikipediaResolver<Maybe<string>, TypeParent, TContext>;
   }
 
   export type ActiveResolver<
     R = Maybe<boolean>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type CrewCapacityResolver<
     R = Maybe<number>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type DescriptionResolver<
     R = Maybe<string>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type DiameterResolver<
     R = Maybe<Distance>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type DryMassKgResolver<
     R = Maybe<number>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type DryMassLbResolver<
     R = Maybe<number>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type FirstFlightResolver<
     R = Maybe<string>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type HeatShieldResolver<
     R = Maybe<DragonHeatShield>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type HeightWTrunkResolver<
     R = Maybe<Distance>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type IdResolver<
     R = Maybe<string>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LaunchPayloadMassResolver<
     R = Maybe<Mass>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LaunchPayloadVolResolver<
     R = Maybe<Volume>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type NameResolver<
     R = Maybe<string>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type OrbitDurationYrResolver<
     R = Maybe<number>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type PressurizedCapsuleResolver<
     R = Maybe<DragonPressurizedCapsule>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ReturnPayloadMassResolver<
     R = Maybe<Mass>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ReturnPayloadVolResolver<
     R = Maybe<Volume>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type SidewallAngleDegResolver<
     R = Maybe<number>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ThrustersResolver<
     R = Maybe<(Maybe<DragonThrust>)[]>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type TrunkResolver<
     R = Maybe<DragonTrunk>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type TypeResolver<
     R = Maybe<string>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type WikipediaResolver<
     R = Maybe<string>,
     Parent = Dragon,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace DistanceResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Distance> {
-    feet?: FeetResolver<Maybe<number>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = Distance> {
+    feet?: FeetResolver<Maybe<number>, TypeParent, TContext>;
 
-    meters?: MetersResolver<Maybe<number>, TypeParent, Context>;
+    meters?: MetersResolver<Maybe<number>, TypeParent, TContext>;
   }
 
   export type FeetResolver<
     R = Maybe<number>,
     Parent = Distance,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type MetersResolver<
     R = Maybe<number>,
     Parent = Distance,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace DragonHeatShieldResolvers {
   export interface Resolvers<
-    Context = MyContext,
+    TContext = MyContext,
     TypeParent = DragonHeatShield
   > {
-    dev_partner?: DevPartnerResolver<Maybe<string>, TypeParent, Context>;
+    dev_partner?: DevPartnerResolver<Maybe<string>, TypeParent, TContext>;
 
-    material?: MaterialResolver<Maybe<string>, TypeParent, Context>;
+    material?: MaterialResolver<Maybe<string>, TypeParent, TContext>;
 
-    size_meters?: SizeMetersResolver<Maybe<number>, TypeParent, Context>;
+    size_meters?: SizeMetersResolver<Maybe<number>, TypeParent, TContext>;
 
-    temp_degrees?: TempDegreesResolver<Maybe<number>, TypeParent, Context>;
+    temp_degrees?: TempDegreesResolver<Maybe<number>, TypeParent, TContext>;
   }
 
   export type DevPartnerResolver<
     R = Maybe<string>,
     Parent = DragonHeatShield,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type MaterialResolver<
     R = Maybe<string>,
     Parent = DragonHeatShield,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type SizeMetersResolver<
     R = Maybe<number>,
     Parent = DragonHeatShield,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type TempDegreesResolver<
     R = Maybe<number>,
     Parent = DragonHeatShield,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace MassResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Mass> {
-    kg?: KgResolver<Maybe<number>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = Mass> {
+    kg?: KgResolver<Maybe<number>, TypeParent, TContext>;
 
-    lb?: LbResolver<Maybe<number>, TypeParent, Context>;
+    lb?: LbResolver<Maybe<number>, TypeParent, TContext>;
   }
 
   export type KgResolver<
     R = Maybe<number>,
     Parent = Mass,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LbResolver<
     R = Maybe<number>,
     Parent = Mass,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace VolumeResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Volume> {
-    cubic_feet?: CubicFeetResolver<Maybe<number>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = Volume> {
+    cubic_feet?: CubicFeetResolver<Maybe<number>, TypeParent, TContext>;
 
-    cubic_meters?: CubicMetersResolver<Maybe<number>, TypeParent, Context>;
+    cubic_meters?: CubicMetersResolver<Maybe<number>, TypeParent, TContext>;
   }
 
   export type CubicFeetResolver<
     R = Maybe<number>,
     Parent = Volume,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type CubicMetersResolver<
     R = Maybe<number>,
     Parent = Volume,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace DragonPressurizedCapsuleResolvers {
   export interface Resolvers<
-    Context = MyContext,
+    TContext = MyContext,
     TypeParent = DragonPressurizedCapsule
   > {
-    payload_volume?: PayloadVolumeResolver<Maybe<Volume>, TypeParent, Context>;
+    payload_volume?: PayloadVolumeResolver<Maybe<Volume>, TypeParent, TContext>;
   }
 
   export type PayloadVolumeResolver<
     R = Maybe<Volume>,
     Parent = DragonPressurizedCapsule,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace DragonThrustResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = DragonThrust> {
-    amount?: AmountResolver<Maybe<number>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = DragonThrust> {
+    amount?: AmountResolver<Maybe<number>, TypeParent, TContext>;
 
-    fuel_1?: Fuel_1Resolver<Maybe<string>, TypeParent, Context>;
+    fuel_1?: Fuel_1Resolver<Maybe<string>, TypeParent, TContext>;
 
-    fuel_2?: Fuel_2Resolver<Maybe<string>, TypeParent, Context>;
+    fuel_2?: Fuel_2Resolver<Maybe<string>, TypeParent, TContext>;
 
-    pods?: PodsResolver<Maybe<number>, TypeParent, Context>;
+    pods?: PodsResolver<Maybe<number>, TypeParent, TContext>;
 
-    thrust?: ThrustResolver<Maybe<Force>, TypeParent, Context>;
+    thrust?: ThrustResolver<Maybe<Force>, TypeParent, TContext>;
 
-    type?: TypeResolver<Maybe<string>, TypeParent, Context>;
+    type?: TypeResolver<Maybe<string>, TypeParent, TContext>;
   }
 
   export type AmountResolver<
     R = Maybe<number>,
     Parent = DragonThrust,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type Fuel_1Resolver<
     R = Maybe<string>,
     Parent = DragonThrust,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type Fuel_2Resolver<
     R = Maybe<string>,
     Parent = DragonThrust,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type PodsResolver<
     R = Maybe<number>,
     Parent = DragonThrust,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ThrustResolver<
     R = Maybe<Force>,
     Parent = DragonThrust,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type TypeResolver<
     R = Maybe<string>,
     Parent = DragonThrust,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace ForceResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Force> {
-    kN?: KNResolver<Maybe<number>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = Force> {
+    kN?: KNResolver<Maybe<number>, TypeParent, TContext>;
 
-    lbf?: LbfResolver<Maybe<number>, TypeParent, Context>;
+    lbf?: LbfResolver<Maybe<number>, TypeParent, TContext>;
   }
 
   export type KNResolver<
     R = Maybe<number>,
     Parent = Force,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LbfResolver<
     R = Maybe<number>,
     Parent = Force,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace DragonTrunkResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = DragonTrunk> {
-    cargo?: CargoResolver<Maybe<DragonTrunkCargo>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = DragonTrunk> {
+    cargo?: CargoResolver<Maybe<DragonTrunkCargo>, TypeParent, TContext>;
 
-    trunk_volume?: TrunkVolumeResolver<Maybe<Volume>, TypeParent, Context>;
+    trunk_volume?: TrunkVolumeResolver<Maybe<Volume>, TypeParent, TContext>;
   }
 
   export type CargoResolver<
     R = Maybe<DragonTrunkCargo>,
     Parent = DragonTrunk,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type TrunkVolumeResolver<
     R = Maybe<Volume>,
     Parent = DragonTrunk,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace DragonTrunkCargoResolvers {
   export interface Resolvers<
-    Context = MyContext,
+    TContext = MyContext,
     TypeParent = DragonTrunkCargo
   > {
-    solar_array?: SolarArrayResolver<Maybe<number>, TypeParent, Context>;
+    solar_array?: SolarArrayResolver<Maybe<number>, TypeParent, TContext>;
 
     unpressurized_cargo?: UnpressurizedCargoResolver<
       Maybe<boolean>,
       TypeParent,
-      Context
+      TContext
     >;
   }
 
   export type SolarArrayResolver<
     R = Maybe<number>,
     Parent = DragonTrunkCargo,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type UnpressurizedCargoResolver<
     R = Maybe<boolean>,
     Parent = DragonTrunkCargo,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace InfoResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Info> {
-    ceo?: CeoResolver<Maybe<string>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = Info> {
+    ceo?: CeoResolver<Maybe<string>, TypeParent, TContext>;
 
-    coo?: CooResolver<Maybe<string>, TypeParent, Context>;
+    coo?: CooResolver<Maybe<string>, TypeParent, TContext>;
 
-    cto_propulsion?: CtoPropulsionResolver<Maybe<string>, TypeParent, Context>;
+    cto_propulsion?: CtoPropulsionResolver<Maybe<string>, TypeParent, TContext>;
 
-    cto?: CtoResolver<Maybe<string>, TypeParent, Context>;
+    cto?: CtoResolver<Maybe<string>, TypeParent, TContext>;
 
-    employees?: EmployeesResolver<Maybe<number>, TypeParent, Context>;
+    employees?: EmployeesResolver<Maybe<number>, TypeParent, TContext>;
 
-    founded?: FoundedResolver<Maybe<number>, TypeParent, Context>;
+    founded?: FoundedResolver<Maybe<number>, TypeParent, TContext>;
 
-    founder?: FounderResolver<Maybe<string>, TypeParent, Context>;
+    founder?: FounderResolver<Maybe<string>, TypeParent, TContext>;
 
-    headquarters?: HeadquartersResolver<Maybe<Address>, TypeParent, Context>;
+    headquarters?: HeadquartersResolver<Maybe<Address>, TypeParent, TContext>;
 
-    launch_sites?: LaunchSitesResolver<Maybe<number>, TypeParent, Context>;
+    launch_sites?: LaunchSitesResolver<Maybe<number>, TypeParent, TContext>;
 
-    links?: LinksResolver<Maybe<InfoLinks>, TypeParent, Context>;
+    links?: LinksResolver<Maybe<InfoLinks>, TypeParent, TContext>;
 
-    name?: NameResolver<Maybe<string>, TypeParent, Context>;
+    name?: NameResolver<Maybe<string>, TypeParent, TContext>;
 
-    summary?: SummaryResolver<Maybe<string>, TypeParent, Context>;
+    summary?: SummaryResolver<Maybe<string>, TypeParent, TContext>;
 
-    test_sites?: TestSitesResolver<Maybe<number>, TypeParent, Context>;
+    test_sites?: TestSitesResolver<Maybe<number>, TypeParent, TContext>;
 
-    valuation?: ValuationResolver<Maybe<number>, TypeParent, Context>;
+    valuation?: ValuationResolver<Maybe<number>, TypeParent, TContext>;
 
-    vehicles?: VehiclesResolver<Maybe<number>, TypeParent, Context>;
+    vehicles?: VehiclesResolver<Maybe<number>, TypeParent, TContext>;
   }
 
   export type CeoResolver<
     R = Maybe<string>,
     Parent = Info,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type CooResolver<
     R = Maybe<string>,
     Parent = Info,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type CtoPropulsionResolver<
     R = Maybe<string>,
     Parent = Info,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type CtoResolver<
     R = Maybe<string>,
     Parent = Info,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type EmployeesResolver<
     R = Maybe<number>,
     Parent = Info,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type FoundedResolver<
     R = Maybe<number>,
     Parent = Info,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type FounderResolver<
     R = Maybe<string>,
     Parent = Info,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type HeadquartersResolver<
     R = Maybe<Address>,
     Parent = Info,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LaunchSitesResolver<
     R = Maybe<number>,
     Parent = Info,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LinksResolver<
     R = Maybe<InfoLinks>,
     Parent = Info,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type NameResolver<
     R = Maybe<string>,
     Parent = Info,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type SummaryResolver<
     R = Maybe<string>,
     Parent = Info,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type TestSitesResolver<
     R = Maybe<number>,
     Parent = Info,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ValuationResolver<
     R = Maybe<number>,
     Parent = Info,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type VehiclesResolver<
     R = Maybe<number>,
     Parent = Info,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace AddressResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Address> {
-    address?: AddressResolver<Maybe<string>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = Address> {
+    address?: AddressResolver<Maybe<string>, TypeParent, TContext>;
 
-    city?: CityResolver<Maybe<string>, TypeParent, Context>;
+    city?: CityResolver<Maybe<string>, TypeParent, TContext>;
 
-    state?: StateResolver<Maybe<string>, TypeParent, Context>;
+    state?: StateResolver<Maybe<string>, TypeParent, TContext>;
   }
 
   export type AddressResolver<
     R = Maybe<string>,
     Parent = Address,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type CityResolver<
     R = Maybe<string>,
     Parent = Address,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type StateResolver<
     R = Maybe<string>,
     Parent = Address,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace InfoLinksResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = InfoLinks> {
-    elon_twitter?: ElonTwitterResolver<Maybe<string>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = InfoLinks> {
+    elon_twitter?: ElonTwitterResolver<Maybe<string>, TypeParent, TContext>;
 
-    flickr?: FlickrResolver<Maybe<string>, TypeParent, Context>;
+    flickr?: FlickrResolver<Maybe<string>, TypeParent, TContext>;
 
-    twitter?: TwitterResolver<Maybe<string>, TypeParent, Context>;
+    twitter?: TwitterResolver<Maybe<string>, TypeParent, TContext>;
 
-    website?: WebsiteResolver<Maybe<string>, TypeParent, Context>;
+    website?: WebsiteResolver<Maybe<string>, TypeParent, TContext>;
   }
 
   export type ElonTwitterResolver<
     R = Maybe<string>,
     Parent = InfoLinks,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type FlickrResolver<
     R = Maybe<string>,
     Parent = InfoLinks,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type TwitterResolver<
     R = Maybe<string>,
     Parent = InfoLinks,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type WebsiteResolver<
     R = Maybe<string>,
     Parent = InfoLinks,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace CoreResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Core> {
-    asds_attempts?: AsdsAttemptsResolver<Maybe<number>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = Core> {
+    asds_attempts?: AsdsAttemptsResolver<Maybe<number>, TypeParent, TContext>;
 
-    asds_landings?: AsdsLandingsResolver<Maybe<number>, TypeParent, Context>;
+    asds_landings?: AsdsLandingsResolver<Maybe<number>, TypeParent, TContext>;
 
-    block?: BlockResolver<Maybe<number>, TypeParent, Context>;
+    block?: BlockResolver<Maybe<number>, TypeParent, TContext>;
 
-    id?: IdResolver<Maybe<string>, TypeParent, Context>;
+    id?: IdResolver<Maybe<string>, TypeParent, TContext>;
 
     missions?: MissionsResolver<
       Maybe<(Maybe<CapsuleMission>)[]>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    original_launch?: OriginalLaunchResolver<Maybe<Date>, TypeParent, Context>;
+    original_launch?: OriginalLaunchResolver<Maybe<Date>, TypeParent, TContext>;
 
-    reuse_count?: ReuseCountResolver<Maybe<number>, TypeParent, Context>;
+    reuse_count?: ReuseCountResolver<Maybe<number>, TypeParent, TContext>;
 
-    rtls_attempts?: RtlsAttemptsResolver<Maybe<number>, TypeParent, Context>;
+    rtls_attempts?: RtlsAttemptsResolver<Maybe<number>, TypeParent, TContext>;
 
-    rtls_landings?: RtlsLandingsResolver<Maybe<number>, TypeParent, Context>;
+    rtls_landings?: RtlsLandingsResolver<Maybe<number>, TypeParent, TContext>;
 
-    status?: StatusResolver<Maybe<string>, TypeParent, Context>;
+    status?: StatusResolver<Maybe<string>, TypeParent, TContext>;
 
-    water_landing?: WaterLandingResolver<Maybe<boolean>, TypeParent, Context>;
+    water_landing?: WaterLandingResolver<Maybe<boolean>, TypeParent, TContext>;
   }
 
   export type AsdsAttemptsResolver<
     R = Maybe<number>,
     Parent = Core,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type AsdsLandingsResolver<
     R = Maybe<number>,
     Parent = Core,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type BlockResolver<
     R = Maybe<number>,
     Parent = Core,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type IdResolver<
     R = Maybe<string>,
     Parent = Core,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type MissionsResolver<
     R = Maybe<(Maybe<CapsuleMission>)[]>,
     Parent = Core,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type OriginalLaunchResolver<
     R = Maybe<Date>,
     Parent = Core,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ReuseCountResolver<
     R = Maybe<number>,
     Parent = Core,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type RtlsAttemptsResolver<
     R = Maybe<number>,
     Parent = Core,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type RtlsLandingsResolver<
     R = Maybe<number>,
     Parent = Core,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type StatusResolver<
     R = Maybe<string>,
     Parent = Core,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type WaterLandingResolver<
     R = Maybe<boolean>,
     Parent = Core,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace HistoryResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = History> {
-    details?: DetailsResolver<Maybe<string>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = History> {
+    details?: DetailsResolver<Maybe<string>, TypeParent, TContext>;
 
-    event_date_unix?: EventDateUnixResolver<Maybe<Date>, TypeParent, Context>;
+    event_date_unix?: EventDateUnixResolver<Maybe<Date>, TypeParent, TContext>;
 
-    event_date_utc?: EventDateUtcResolver<Maybe<Date>, TypeParent, Context>;
+    event_date_utc?: EventDateUtcResolver<Maybe<Date>, TypeParent, TContext>;
 
-    id?: IdResolver<Maybe<string>, TypeParent, Context>;
+    id?: IdResolver<Maybe<string>, TypeParent, TContext>;
 
-    links?: LinksResolver<Maybe<Link>, TypeParent, Context>;
+    links?: LinksResolver<Maybe<Link>, TypeParent, TContext>;
 
-    title?: TitleResolver<Maybe<string>, TypeParent, Context>;
+    title?: TitleResolver<Maybe<string>, TypeParent, TContext>;
 
-    flight?: FlightResolver<Maybe<Launch>, TypeParent, Context>;
+    flight?: FlightResolver<Maybe<Launch>, TypeParent, TContext>;
   }
 
   export type DetailsResolver<
     R = Maybe<string>,
     Parent = History,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type EventDateUnixResolver<
     R = Maybe<Date>,
     Parent = History,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type EventDateUtcResolver<
     R = Maybe<Date>,
     Parent = History,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type IdResolver<
     R = Maybe<string>,
     Parent = History,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LinksResolver<
     R = Maybe<Link>,
     Parent = History,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type TitleResolver<
     R = Maybe<string>,
     Parent = History,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type FlightResolver<
     R = Maybe<Launch>,
     Parent = History,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace LinkResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Link> {
-    article?: ArticleResolver<Maybe<string>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = Link> {
+    article?: ArticleResolver<Maybe<string>, TypeParent, TContext>;
 
-    reddit?: RedditResolver<Maybe<string>, TypeParent, Context>;
+    reddit?: RedditResolver<Maybe<string>, TypeParent, TContext>;
 
-    wikipedia?: WikipediaResolver<Maybe<string>, TypeParent, Context>;
+    wikipedia?: WikipediaResolver<Maybe<string>, TypeParent, TContext>;
   }
 
   export type ArticleResolver<
     R = Maybe<string>,
     Parent = Link,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type RedditResolver<
     R = Maybe<string>,
     Parent = Link,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type WikipediaResolver<
     R = Maybe<string>,
     Parent = Link,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace LaunchResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Launch> {
-    details?: DetailsResolver<Maybe<string>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = Launch> {
+    details?: DetailsResolver<Maybe<string>, TypeParent, TContext>;
 
-    id?: IdResolver<Maybe<string>, TypeParent, Context>;
+    id?: IdResolver<Maybe<string>, TypeParent, TContext>;
 
-    is_tentative?: IsTentativeResolver<Maybe<boolean>, TypeParent, Context>;
+    is_tentative?: IsTentativeResolver<Maybe<boolean>, TypeParent, TContext>;
 
     launch_date_local?: LaunchDateLocalResolver<
       Maybe<Date>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    launch_date_unix?: LaunchDateUnixResolver<Maybe<Date>, TypeParent, Context>;
+    launch_date_unix?: LaunchDateUnixResolver<
+      Maybe<Date>,
+      TypeParent,
+      TContext
+    >;
 
-    launch_date_utc?: LaunchDateUtcResolver<Maybe<Date>, TypeParent, Context>;
+    launch_date_utc?: LaunchDateUtcResolver<Maybe<Date>, TypeParent, TContext>;
 
-    launch_site?: LaunchSiteResolver<Maybe<LaunchSite>, TypeParent, Context>;
+    launch_site?: LaunchSiteResolver<Maybe<LaunchSite>, TypeParent, TContext>;
 
-    launch_success?: LaunchSuccessResolver<Maybe<boolean>, TypeParent, Context>;
+    launch_success?: LaunchSuccessResolver<
+      Maybe<boolean>,
+      TypeParent,
+      TContext
+    >;
 
-    launch_year?: LaunchYearResolver<Maybe<string>, TypeParent, Context>;
+    launch_year?: LaunchYearResolver<Maybe<string>, TypeParent, TContext>;
 
-    links?: LinksResolver<Maybe<LaunchLinks>, TypeParent, Context>;
+    links?: LinksResolver<Maybe<LaunchLinks>, TypeParent, TContext>;
 
     mission_id?: MissionIdResolver<
       Maybe<(Maybe<string>)[]>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    mission_name?: MissionNameResolver<Maybe<string>, TypeParent, Context>;
+    mission_name?: MissionNameResolver<Maybe<string>, TypeParent, TContext>;
 
-    rocket?: RocketResolver<Maybe<LaunchRocket>, TypeParent, Context>;
+    rocket?: RocketResolver<Maybe<LaunchRocket>, TypeParent, TContext>;
 
     static_fire_date_unix?: StaticFireDateUnixResolver<
       Maybe<Date>,
       TypeParent,
-      Context
+      TContext
     >;
 
     static_fire_date_utc?: StaticFireDateUtcResolver<
       Maybe<Date>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    telemetry?: TelemetryResolver<Maybe<LaunchTelemetry>, TypeParent, Context>;
+    telemetry?: TelemetryResolver<Maybe<LaunchTelemetry>, TypeParent, TContext>;
 
     tentative_max_precision?: TentativeMaxPrecisionResolver<
       Maybe<string>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    upcoming?: UpcomingResolver<Maybe<boolean>, TypeParent, Context>;
+    upcoming?: UpcomingResolver<Maybe<boolean>, TypeParent, TContext>;
 
-    ships?: ShipsResolver<Maybe<(Maybe<Ship>)[]>, TypeParent, Context>;
+    ships?: ShipsResolver<Maybe<(Maybe<Ship>)[]>, TypeParent, TContext>;
   }
 
   export type DetailsResolver<
     R = Maybe<string>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type IdResolver<
     R = Maybe<string>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type IsTentativeResolver<
     R = Maybe<boolean>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LaunchDateLocalResolver<
     R = Maybe<Date>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LaunchDateUnixResolver<
     R = Maybe<Date>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LaunchDateUtcResolver<
     R = Maybe<Date>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LaunchSiteResolver<
     R = Maybe<LaunchSite>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LaunchSuccessResolver<
     R = Maybe<boolean>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LaunchYearResolver<
     R = Maybe<string>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LinksResolver<
     R = Maybe<LaunchLinks>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type MissionIdResolver<
     R = Maybe<(Maybe<string>)[]>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type MissionNameResolver<
     R = Maybe<string>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type RocketResolver<
     R = Maybe<LaunchRocket>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type StaticFireDateUnixResolver<
     R = Maybe<Date>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type StaticFireDateUtcResolver<
     R = Maybe<Date>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type TelemetryResolver<
     R = Maybe<LaunchTelemetry>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type TentativeMaxPrecisionResolver<
     R = Maybe<string>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type UpcomingResolver<
     R = Maybe<boolean>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ShipsResolver<
     R = Maybe<(Maybe<Ship>)[]>,
     Parent = Launch,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace LaunchSiteResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = LaunchSite> {
-    site_id?: SiteIdResolver<Maybe<string>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = LaunchSite> {
+    site_id?: SiteIdResolver<Maybe<string>, TypeParent, TContext>;
 
-    site_name_long?: SiteNameLongResolver<Maybe<string>, TypeParent, Context>;
+    site_name_long?: SiteNameLongResolver<Maybe<string>, TypeParent, TContext>;
 
-    site_name?: SiteNameResolver<Maybe<string>, TypeParent, Context>;
+    site_name?: SiteNameResolver<Maybe<string>, TypeParent, TContext>;
   }
 
   export type SiteIdResolver<
     R = Maybe<string>,
     Parent = LaunchSite,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type SiteNameLongResolver<
     R = Maybe<string>,
     Parent = LaunchSite,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type SiteNameResolver<
     R = Maybe<string>,
     Parent = LaunchSite,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace LaunchLinksResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = LaunchLinks> {
-    article_link?: ArticleLinkResolver<Maybe<string>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = LaunchLinks> {
+    article_link?: ArticleLinkResolver<Maybe<string>, TypeParent, TContext>;
 
     flickr_images?: FlickrImagesResolver<
       Maybe<(Maybe<string>)[]>,
       TypeParent,
-      Context
+      TContext
     >;
 
     mission_patch_small?: MissionPatchSmallResolver<
       Maybe<string>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    mission_patch?: MissionPatchResolver<Maybe<string>, TypeParent, Context>;
+    mission_patch?: MissionPatchResolver<Maybe<string>, TypeParent, TContext>;
 
-    presskit?: PresskitResolver<Maybe<string>, TypeParent, Context>;
+    presskit?: PresskitResolver<Maybe<string>, TypeParent, TContext>;
 
     reddit_campaign?: RedditCampaignResolver<
       Maybe<string>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    reddit_launch?: RedditLaunchResolver<Maybe<string>, TypeParent, Context>;
+    reddit_launch?: RedditLaunchResolver<Maybe<string>, TypeParent, TContext>;
 
-    reddit_media?: RedditMediaResolver<Maybe<string>, TypeParent, Context>;
+    reddit_media?: RedditMediaResolver<Maybe<string>, TypeParent, TContext>;
 
     reddit_recovery?: RedditRecoveryResolver<
       Maybe<string>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    video_link?: VideoLinkResolver<Maybe<string>, TypeParent, Context>;
+    video_link?: VideoLinkResolver<Maybe<string>, TypeParent, TContext>;
 
-    wikipedia?: WikipediaResolver<Maybe<string>, TypeParent, Context>;
+    wikipedia?: WikipediaResolver<Maybe<string>, TypeParent, TContext>;
   }
 
   export type ArticleLinkResolver<
     R = Maybe<string>,
     Parent = LaunchLinks,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type FlickrImagesResolver<
     R = Maybe<(Maybe<string>)[]>,
     Parent = LaunchLinks,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type MissionPatchSmallResolver<
     R = Maybe<string>,
     Parent = LaunchLinks,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type MissionPatchResolver<
     R = Maybe<string>,
     Parent = LaunchLinks,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type PresskitResolver<
     R = Maybe<string>,
     Parent = LaunchLinks,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type RedditCampaignResolver<
     R = Maybe<string>,
     Parent = LaunchLinks,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type RedditLaunchResolver<
     R = Maybe<string>,
     Parent = LaunchLinks,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type RedditMediaResolver<
     R = Maybe<string>,
     Parent = LaunchLinks,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type RedditRecoveryResolver<
     R = Maybe<string>,
     Parent = LaunchLinks,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type VideoLinkResolver<
     R = Maybe<string>,
     Parent = LaunchLinks,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type WikipediaResolver<
     R = Maybe<string>,
     Parent = LaunchLinks,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace LaunchRocketResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = LaunchRocket> {
+  export interface Resolvers<TContext = MyContext, TypeParent = LaunchRocket> {
     fairings?: FairingsResolver<
       Maybe<LaunchRocketFairings>,
       TypeParent,
-      Context
+      TContext
     >;
 
     first_stage?: FirstStageResolver<
       Maybe<LaunchRocketFirstStage>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    rocket_name?: RocketNameResolver<Maybe<string>, TypeParent, Context>;
+    rocket_name?: RocketNameResolver<Maybe<string>, TypeParent, TContext>;
 
-    rocket_type?: RocketTypeResolver<Maybe<string>, TypeParent, Context>;
+    rocket_type?: RocketTypeResolver<Maybe<string>, TypeParent, TContext>;
 
-    rocket?: RocketResolver<Maybe<Rocket>, TypeParent, Context>;
+    rocket?: RocketResolver<Maybe<Rocket>, TypeParent, TContext>;
 
     second_stage?: SecondStageResolver<
       Maybe<LaunchRocketSecondStage>,
       TypeParent,
-      Context
+      TContext
     >;
   }
 
   export type FairingsResolver<
     R = Maybe<LaunchRocketFairings>,
     Parent = LaunchRocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type FirstStageResolver<
     R = Maybe<LaunchRocketFirstStage>,
     Parent = LaunchRocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type RocketNameResolver<
     R = Maybe<string>,
     Parent = LaunchRocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type RocketTypeResolver<
     R = Maybe<string>,
     Parent = LaunchRocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type RocketResolver<
     R = Maybe<Rocket>,
     Parent = LaunchRocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type SecondStageResolver<
     R = Maybe<LaunchRocketSecondStage>,
     Parent = LaunchRocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace LaunchRocketFairingsResolvers {
   export interface Resolvers<
-    Context = MyContext,
+    TContext = MyContext,
     TypeParent = LaunchRocketFairings
   > {
-    recovered?: RecoveredResolver<Maybe<boolean>, TypeParent, Context>;
+    recovered?: RecoveredResolver<Maybe<boolean>, TypeParent, TContext>;
 
     recovery_attempt?: RecoveryAttemptResolver<
       Maybe<boolean>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    reused?: ReusedResolver<Maybe<boolean>, TypeParent, Context>;
+    reused?: ReusedResolver<Maybe<boolean>, TypeParent, TContext>;
 
-    ship?: ShipResolver<Maybe<string>, TypeParent, Context>;
+    ship?: ShipResolver<Maybe<string>, TypeParent, TContext>;
   }
 
   export type RecoveredResolver<
     R = Maybe<boolean>,
     Parent = LaunchRocketFairings,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type RecoveryAttemptResolver<
     R = Maybe<boolean>,
     Parent = LaunchRocketFairings,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ReusedResolver<
     R = Maybe<boolean>,
     Parent = LaunchRocketFairings,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ShipResolver<
     R = Maybe<string>,
     Parent = LaunchRocketFairings,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace LaunchRocketFirstStageResolvers {
   export interface Resolvers<
-    Context = MyContext,
+    TContext = MyContext,
     TypeParent = LaunchRocketFirstStage
   > {
     cores?: CoresResolver<
       Maybe<(Maybe<LaunchRocketFirstStageCore>)[]>,
       TypeParent,
-      Context
+      TContext
     >;
   }
 
   export type CoresResolver<
     R = Maybe<(Maybe<LaunchRocketFirstStageCore>)[]>,
     Parent = LaunchRocketFirstStage,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace LaunchRocketFirstStageCoreResolvers {
   export interface Resolvers<
-    Context = MyContext,
+    TContext = MyContext,
     TypeParent = LaunchRocketFirstStageCore
   > {
-    block?: BlockResolver<Maybe<number>, TypeParent, Context>;
+    block?: BlockResolver<Maybe<number>, TypeParent, TContext>;
 
-    core?: CoreResolver<Maybe<Core>, TypeParent, Context>;
+    core?: CoreResolver<Maybe<Core>, TypeParent, TContext>;
 
-    flight?: FlightResolver<Maybe<number>, TypeParent, Context>;
+    flight?: FlightResolver<Maybe<number>, TypeParent, TContext>;
 
-    gridfins?: GridfinsResolver<Maybe<boolean>, TypeParent, Context>;
+    gridfins?: GridfinsResolver<Maybe<boolean>, TypeParent, TContext>;
 
-    land_success?: LandSuccessResolver<Maybe<boolean>, TypeParent, Context>;
+    land_success?: LandSuccessResolver<Maybe<boolean>, TypeParent, TContext>;
 
-    landing_intent?: LandingIntentResolver<Maybe<boolean>, TypeParent, Context>;
+    landing_intent?: LandingIntentResolver<
+      Maybe<boolean>,
+      TypeParent,
+      TContext
+    >;
 
-    landing_type?: LandingTypeResolver<Maybe<string>, TypeParent, Context>;
+    landing_type?: LandingTypeResolver<Maybe<string>, TypeParent, TContext>;
 
     landing_vehicle?: LandingVehicleResolver<
       Maybe<string>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    legs?: LegsResolver<Maybe<boolean>, TypeParent, Context>;
+    legs?: LegsResolver<Maybe<boolean>, TypeParent, TContext>;
 
-    reused?: ReusedResolver<Maybe<boolean>, TypeParent, Context>;
+    reused?: ReusedResolver<Maybe<boolean>, TypeParent, TContext>;
   }
 
   export type BlockResolver<
     R = Maybe<number>,
     Parent = LaunchRocketFirstStageCore,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type CoreResolver<
     R = Maybe<Core>,
     Parent = LaunchRocketFirstStageCore,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type FlightResolver<
     R = Maybe<number>,
     Parent = LaunchRocketFirstStageCore,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type GridfinsResolver<
     R = Maybe<boolean>,
     Parent = LaunchRocketFirstStageCore,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LandSuccessResolver<
     R = Maybe<boolean>,
     Parent = LaunchRocketFirstStageCore,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LandingIntentResolver<
     R = Maybe<boolean>,
     Parent = LaunchRocketFirstStageCore,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LandingTypeResolver<
     R = Maybe<string>,
     Parent = LaunchRocketFirstStageCore,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LandingVehicleResolver<
     R = Maybe<string>,
     Parent = LaunchRocketFirstStageCore,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LegsResolver<
     R = Maybe<boolean>,
     Parent = LaunchRocketFirstStageCore,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ReusedResolver<
     R = Maybe<boolean>,
     Parent = LaunchRocketFirstStageCore,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace RocketResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Rocket> {
-    active?: ActiveResolver<Maybe<boolean>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = Rocket> {
+    active?: ActiveResolver<Maybe<boolean>, TypeParent, TContext>;
 
-    boosters?: BoostersResolver<Maybe<number>, TypeParent, Context>;
+    boosters?: BoostersResolver<Maybe<number>, TypeParent, TContext>;
 
-    company?: CompanyResolver<Maybe<string>, TypeParent, Context>;
+    company?: CompanyResolver<Maybe<string>, TypeParent, TContext>;
 
-    cost_per_launch?: CostPerLaunchResolver<Maybe<number>, TypeParent, Context>;
+    cost_per_launch?: CostPerLaunchResolver<
+      Maybe<number>,
+      TypeParent,
+      TContext
+    >;
 
-    country?: CountryResolver<Maybe<string>, TypeParent, Context>;
+    country?: CountryResolver<Maybe<string>, TypeParent, TContext>;
 
-    description?: DescriptionResolver<Maybe<string>, TypeParent, Context>;
+    description?: DescriptionResolver<Maybe<string>, TypeParent, TContext>;
 
-    diameter?: DiameterResolver<Maybe<Distance>, TypeParent, Context>;
+    diameter?: DiameterResolver<Maybe<Distance>, TypeParent, TContext>;
 
-    engines?: EnginesResolver<Maybe<RocketEngines>, TypeParent, Context>;
+    engines?: EnginesResolver<Maybe<RocketEngines>, TypeParent, TContext>;
 
-    first_flight?: FirstFlightResolver<Maybe<Date>, TypeParent, Context>;
+    first_flight?: FirstFlightResolver<Maybe<Date>, TypeParent, TContext>;
 
     first_stage?: FirstStageResolver<
       Maybe<RocketFirstStage>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    height?: HeightResolver<Maybe<Distance>, TypeParent, Context>;
+    height?: HeightResolver<Maybe<Distance>, TypeParent, TContext>;
 
-    id?: IdResolver<Maybe<string>, TypeParent, Context>;
+    id?: IdResolver<Maybe<string>, TypeParent, TContext>;
 
     landing_legs?: LandingLegsResolver<
       Maybe<RocketLandingLegs>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    mass?: MassResolver<Maybe<Mass>, TypeParent, Context>;
+    mass?: MassResolver<Maybe<Mass>, TypeParent, TContext>;
 
-    name?: NameResolver<Maybe<string>, TypeParent, Context>;
+    name?: NameResolver<Maybe<string>, TypeParent, TContext>;
 
     payload_weights?: PayloadWeightsResolver<
       Maybe<(Maybe<RocketPayloadWeight>)[]>,
       TypeParent,
-      Context
+      TContext
     >;
 
     second_stage?: SecondStageResolver<
       Maybe<RocketSecondStage>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    stages?: StagesResolver<Maybe<number>, TypeParent, Context>;
+    stages?: StagesResolver<Maybe<number>, TypeParent, TContext>;
 
     success_rate_pct?: SuccessRatePctResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    type?: TypeResolver<Maybe<string>, TypeParent, Context>;
+    type?: TypeResolver<Maybe<string>, TypeParent, TContext>;
 
-    wikipedia?: WikipediaResolver<Maybe<string>, TypeParent, Context>;
+    wikipedia?: WikipediaResolver<Maybe<string>, TypeParent, TContext>;
   }
 
   export type ActiveResolver<
     R = Maybe<boolean>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type BoostersResolver<
     R = Maybe<number>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type CompanyResolver<
     R = Maybe<string>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type CostPerLaunchResolver<
     R = Maybe<number>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type CountryResolver<
     R = Maybe<string>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type DescriptionResolver<
     R = Maybe<string>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type DiameterResolver<
     R = Maybe<Distance>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type EnginesResolver<
     R = Maybe<RocketEngines>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type FirstFlightResolver<
     R = Maybe<Date>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type FirstStageResolver<
     R = Maybe<RocketFirstStage>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type HeightResolver<
     R = Maybe<Distance>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type IdResolver<
     R = Maybe<string>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LandingLegsResolver<
     R = Maybe<RocketLandingLegs>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type MassResolver<
     R = Maybe<Mass>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type NameResolver<
     R = Maybe<string>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type PayloadWeightsResolver<
     R = Maybe<(Maybe<RocketPayloadWeight>)[]>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type SecondStageResolver<
     R = Maybe<RocketSecondStage>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type StagesResolver<
     R = Maybe<number>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type SuccessRatePctResolver<
     R = Maybe<number>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type TypeResolver<
     R = Maybe<string>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type WikipediaResolver<
     R = Maybe<string>,
     Parent = Rocket,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace RocketEnginesResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = RocketEngines> {
-    number?: NumberResolver<Maybe<number>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = RocketEngines> {
+    number?: NumberResolver<Maybe<number>, TypeParent, TContext>;
 
-    type?: TypeResolver<Maybe<string>, TypeParent, Context>;
+    type?: TypeResolver<Maybe<string>, TypeParent, TContext>;
 
-    version?: VersionResolver<Maybe<string>, TypeParent, Context>;
+    version?: VersionResolver<Maybe<string>, TypeParent, TContext>;
 
-    layout?: LayoutResolver<Maybe<string>, TypeParent, Context>;
+    layout?: LayoutResolver<Maybe<string>, TypeParent, TContext>;
 
-    engine_loss_max?: EngineLossMaxResolver<Maybe<string>, TypeParent, Context>;
+    engine_loss_max?: EngineLossMaxResolver<
+      Maybe<string>,
+      TypeParent,
+      TContext
+    >;
 
-    propellant_1?: Propellant_1Resolver<Maybe<string>, TypeParent, Context>;
+    propellant_1?: Propellant_1Resolver<Maybe<string>, TypeParent, TContext>;
 
-    propellant_2?: Propellant_2Resolver<Maybe<string>, TypeParent, Context>;
+    propellant_2?: Propellant_2Resolver<Maybe<string>, TypeParent, TContext>;
 
     thrust_sea_level?: ThrustSeaLevelResolver<
       Maybe<Force>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    thrust_vacuum?: ThrustVacuumResolver<Maybe<Force>, TypeParent, Context>;
+    thrust_vacuum?: ThrustVacuumResolver<Maybe<Force>, TypeParent, TContext>;
 
     thrust_to_weight?: ThrustToWeightResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
   }
 
   export type NumberResolver<
     R = Maybe<number>,
     Parent = RocketEngines,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type TypeResolver<
     R = Maybe<string>,
     Parent = RocketEngines,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type VersionResolver<
     R = Maybe<string>,
     Parent = RocketEngines,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LayoutResolver<
     R = Maybe<string>,
     Parent = RocketEngines,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type EngineLossMaxResolver<
     R = Maybe<string>,
     Parent = RocketEngines,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type Propellant_1Resolver<
     R = Maybe<string>,
     Parent = RocketEngines,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type Propellant_2Resolver<
     R = Maybe<string>,
     Parent = RocketEngines,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ThrustSeaLevelResolver<
     R = Maybe<Force>,
     Parent = RocketEngines,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ThrustVacuumResolver<
     R = Maybe<Force>,
     Parent = RocketEngines,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ThrustToWeightResolver<
     R = Maybe<number>,
     Parent = RocketEngines,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace RocketFirstStageResolvers {
   export interface Resolvers<
-    Context = MyContext,
+    TContext = MyContext,
     TypeParent = RocketFirstStage
   > {
-    burn_time_sec?: BurnTimeSecResolver<Maybe<number>, TypeParent, Context>;
+    burn_time_sec?: BurnTimeSecResolver<Maybe<number>, TypeParent, TContext>;
 
-    engines?: EnginesResolver<Maybe<number>, TypeParent, Context>;
+    engines?: EnginesResolver<Maybe<number>, TypeParent, TContext>;
 
     fuel_amount_tons?: FuelAmountTonsResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    reusable?: ReusableResolver<Maybe<boolean>, TypeParent, Context>;
+    reusable?: ReusableResolver<Maybe<boolean>, TypeParent, TContext>;
 
     thrust_sea_level?: ThrustSeaLevelResolver<
       Maybe<Force>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    thrust_vacuum?: ThrustVacuumResolver<Maybe<Force>, TypeParent, Context>;
+    thrust_vacuum?: ThrustVacuumResolver<Maybe<Force>, TypeParent, TContext>;
   }
 
   export type BurnTimeSecResolver<
     R = Maybe<number>,
     Parent = RocketFirstStage,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type EnginesResolver<
     R = Maybe<number>,
     Parent = RocketFirstStage,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type FuelAmountTonsResolver<
     R = Maybe<number>,
     Parent = RocketFirstStage,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ReusableResolver<
     R = Maybe<boolean>,
     Parent = RocketFirstStage,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ThrustSeaLevelResolver<
     R = Maybe<Force>,
     Parent = RocketFirstStage,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ThrustVacuumResolver<
     R = Maybe<Force>,
     Parent = RocketFirstStage,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace RocketLandingLegsResolvers {
   export interface Resolvers<
-    Context = MyContext,
+    TContext = MyContext,
     TypeParent = RocketLandingLegs
   > {
-    number?: NumberResolver<Maybe<number>, TypeParent, Context>;
+    number?: NumberResolver<Maybe<number>, TypeParent, TContext>;
 
-    material?: MaterialResolver<Maybe<string>, TypeParent, Context>;
+    material?: MaterialResolver<Maybe<string>, TypeParent, TContext>;
   }
 
   export type NumberResolver<
     R = Maybe<number>,
     Parent = RocketLandingLegs,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type MaterialResolver<
     R = Maybe<string>,
     Parent = RocketLandingLegs,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace RocketPayloadWeightResolvers {
   export interface Resolvers<
-    Context = MyContext,
+    TContext = MyContext,
     TypeParent = RocketPayloadWeight
   > {
-    id?: IdResolver<Maybe<string>, TypeParent, Context>;
+    id?: IdResolver<Maybe<string>, TypeParent, TContext>;
 
-    kg?: KgResolver<Maybe<number>, TypeParent, Context>;
+    kg?: KgResolver<Maybe<number>, TypeParent, TContext>;
 
-    lb?: LbResolver<Maybe<number>, TypeParent, Context>;
+    lb?: LbResolver<Maybe<number>, TypeParent, TContext>;
 
-    name?: NameResolver<Maybe<string>, TypeParent, Context>;
+    name?: NameResolver<Maybe<string>, TypeParent, TContext>;
   }
 
   export type IdResolver<
     R = Maybe<string>,
     Parent = RocketPayloadWeight,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type KgResolver<
     R = Maybe<number>,
     Parent = RocketPayloadWeight,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LbResolver<
     R = Maybe<number>,
     Parent = RocketPayloadWeight,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type NameResolver<
     R = Maybe<string>,
     Parent = RocketPayloadWeight,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace RocketSecondStageResolvers {
   export interface Resolvers<
-    Context = MyContext,
+    TContext = MyContext,
     TypeParent = RocketSecondStage
   > {
-    burn_time_sec?: BurnTimeSecResolver<Maybe<number>, TypeParent, Context>;
+    burn_time_sec?: BurnTimeSecResolver<Maybe<number>, TypeParent, TContext>;
 
-    engines?: EnginesResolver<Maybe<number>, TypeParent, Context>;
+    engines?: EnginesResolver<Maybe<number>, TypeParent, TContext>;
 
     fuel_amount_tons?: FuelAmountTonsResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
 
     payloads?: PayloadsResolver<
       Maybe<RocketSecondStagePayloads>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    thrust?: ThrustResolver<Maybe<Force>, TypeParent, Context>;
+    thrust?: ThrustResolver<Maybe<Force>, TypeParent, TContext>;
   }
 
   export type BurnTimeSecResolver<
     R = Maybe<number>,
     Parent = RocketSecondStage,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type EnginesResolver<
     R = Maybe<number>,
     Parent = RocketSecondStage,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type FuelAmountTonsResolver<
     R = Maybe<number>,
     Parent = RocketSecondStage,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type PayloadsResolver<
     R = Maybe<RocketSecondStagePayloads>,
     Parent = RocketSecondStage,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ThrustResolver<
     R = Maybe<Force>,
     Parent = RocketSecondStage,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace RocketSecondStagePayloadsResolvers {
   export interface Resolvers<
-    Context = MyContext,
+    TContext = MyContext,
     TypeParent = RocketSecondStagePayloads
   > {
-    option_1?: Option_1Resolver<Maybe<string>, TypeParent, Context>;
+    option_1?: Option_1Resolver<Maybe<string>, TypeParent, TContext>;
 
     composite_fairing?: CompositeFairingResolver<
       Maybe<RocketSecondStagePayloadCompositeFairing>,
       TypeParent,
-      Context
+      TContext
     >;
   }
 
   export type Option_1Resolver<
     R = Maybe<string>,
     Parent = RocketSecondStagePayloads,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type CompositeFairingResolver<
     R = Maybe<RocketSecondStagePayloadCompositeFairing>,
     Parent = RocketSecondStagePayloads,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace RocketSecondStagePayloadCompositeFairingResolvers {
   export interface Resolvers<
-    Context = MyContext,
+    TContext = MyContext,
     TypeParent = RocketSecondStagePayloadCompositeFairing
   > {
-    height?: HeightResolver<Maybe<Distance>, TypeParent, Context>;
+    height?: HeightResolver<Maybe<Distance>, TypeParent, TContext>;
 
-    diameter?: DiameterResolver<Maybe<Distance>, TypeParent, Context>;
+    diameter?: DiameterResolver<Maybe<Distance>, TypeParent, TContext>;
   }
 
   export type HeightResolver<
     R = Maybe<Distance>,
     Parent = RocketSecondStagePayloadCompositeFairing,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type DiameterResolver<
     R = Maybe<Distance>,
     Parent = RocketSecondStagePayloadCompositeFairing,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace LaunchRocketSecondStageResolvers {
   export interface Resolvers<
-    Context = MyContext,
+    TContext = MyContext,
     TypeParent = LaunchRocketSecondStage
   > {
-    block?: BlockResolver<Maybe<number>, TypeParent, Context>;
+    block?: BlockResolver<Maybe<number>, TypeParent, TContext>;
 
-    payloads?: PayloadsResolver<Maybe<(Maybe<Payload>)[]>, TypeParent, Context>;
+    payloads?: PayloadsResolver<
+      Maybe<(Maybe<Payload>)[]>,
+      TypeParent,
+      TContext
+    >;
   }
 
   export type BlockResolver<
     R = Maybe<number>,
     Parent = LaunchRocketSecondStage,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type PayloadsResolver<
     R = Maybe<(Maybe<Payload>)[]>,
     Parent = LaunchRocketSecondStage,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace PayloadResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Payload> {
+  export interface Resolvers<TContext = MyContext, TypeParent = Payload> {
     customers?: CustomersResolver<
       Maybe<(Maybe<string>)[]>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    id?: IdResolver<Maybe<string>, TypeParent, Context>;
+    id?: IdResolver<Maybe<string>, TypeParent, TContext>;
 
-    manufacturer?: ManufacturerResolver<Maybe<string>, TypeParent, Context>;
+    manufacturer?: ManufacturerResolver<Maybe<string>, TypeParent, TContext>;
 
-    nationality?: NationalityResolver<Maybe<string>, TypeParent, Context>;
+    nationality?: NationalityResolver<Maybe<string>, TypeParent, TContext>;
 
-    norad_id?: NoradIdResolver<Maybe<(Maybe<number>)[]>, TypeParent, Context>;
+    norad_id?: NoradIdResolver<Maybe<(Maybe<number>)[]>, TypeParent, TContext>;
 
     orbit_params?: OrbitParamsResolver<
       Maybe<PayloadOrbitParams>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    orbit?: OrbitResolver<Maybe<string>, TypeParent, Context>;
+    orbit?: OrbitResolver<Maybe<string>, TypeParent, TContext>;
 
-    payload_mass_kg?: PayloadMassKgResolver<Maybe<number>, TypeParent, Context>;
+    payload_mass_kg?: PayloadMassKgResolver<
+      Maybe<number>,
+      TypeParent,
+      TContext
+    >;
 
     payload_mass_lbs?: PayloadMassLbsResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    payload_type?: PayloadTypeResolver<Maybe<string>, TypeParent, Context>;
+    payload_type?: PayloadTypeResolver<Maybe<string>, TypeParent, TContext>;
 
-    reused?: ReusedResolver<Maybe<boolean>, TypeParent, Context>;
+    reused?: ReusedResolver<Maybe<boolean>, TypeParent, TContext>;
   }
 
   export type CustomersResolver<
     R = Maybe<(Maybe<string>)[]>,
     Parent = Payload,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type IdResolver<
     R = Maybe<string>,
     Parent = Payload,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ManufacturerResolver<
     R = Maybe<string>,
     Parent = Payload,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type NationalityResolver<
     R = Maybe<string>,
     Parent = Payload,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type NoradIdResolver<
     R = Maybe<(Maybe<number>)[]>,
     Parent = Payload,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type OrbitParamsResolver<
     R = Maybe<PayloadOrbitParams>,
     Parent = Payload,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type OrbitResolver<
     R = Maybe<string>,
     Parent = Payload,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type PayloadMassKgResolver<
     R = Maybe<number>,
     Parent = Payload,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type PayloadMassLbsResolver<
     R = Maybe<number>,
     Parent = Payload,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type PayloadTypeResolver<
     R = Maybe<string>,
     Parent = Payload,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ReusedResolver<
     R = Maybe<boolean>,
     Parent = Payload,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace PayloadOrbitParamsResolvers {
   export interface Resolvers<
-    Context = MyContext,
+    TContext = MyContext,
     TypeParent = PayloadOrbitParams
   > {
-    apoapsis_km?: ApoapsisKmResolver<Maybe<number>, TypeParent, Context>;
+    apoapsis_km?: ApoapsisKmResolver<Maybe<number>, TypeParent, TContext>;
 
     arg_of_pericenter?: ArgOfPericenterResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    eccentricity?: EccentricityResolver<Maybe<number>, TypeParent, Context>;
+    eccentricity?: EccentricityResolver<Maybe<number>, TypeParent, TContext>;
 
-    epoch?: EpochResolver<Maybe<Date>, TypeParent, Context>;
+    epoch?: EpochResolver<Maybe<Date>, TypeParent, TContext>;
 
     inclination_deg?: InclinationDegResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    lifespan_years?: LifespanYearsResolver<Maybe<number>, TypeParent, Context>;
+    lifespan_years?: LifespanYearsResolver<Maybe<number>, TypeParent, TContext>;
 
-    longitude?: LongitudeResolver<Maybe<number>, TypeParent, Context>;
+    longitude?: LongitudeResolver<Maybe<number>, TypeParent, TContext>;
 
-    mean_anomaly?: MeanAnomalyResolver<Maybe<number>, TypeParent, Context>;
+    mean_anomaly?: MeanAnomalyResolver<Maybe<number>, TypeParent, TContext>;
 
-    mean_motion?: MeanMotionResolver<Maybe<number>, TypeParent, Context>;
+    mean_motion?: MeanMotionResolver<Maybe<number>, TypeParent, TContext>;
 
-    periapsis_km?: PeriapsisKmResolver<Maybe<number>, TypeParent, Context>;
+    periapsis_km?: PeriapsisKmResolver<Maybe<number>, TypeParent, TContext>;
 
-    period_min?: PeriodMinResolver<Maybe<number>, TypeParent, Context>;
+    period_min?: PeriodMinResolver<Maybe<number>, TypeParent, TContext>;
 
-    raan?: RaanResolver<Maybe<number>, TypeParent, Context>;
+    raan?: RaanResolver<Maybe<number>, TypeParent, TContext>;
 
     reference_system?: ReferenceSystemResolver<
       Maybe<string>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    regime?: RegimeResolver<Maybe<string>, TypeParent, Context>;
+    regime?: RegimeResolver<Maybe<string>, TypeParent, TContext>;
 
     semi_major_axis_km?: SemiMajorAxisKmResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
   }
 
   export type ApoapsisKmResolver<
     R = Maybe<number>,
     Parent = PayloadOrbitParams,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ArgOfPericenterResolver<
     R = Maybe<number>,
     Parent = PayloadOrbitParams,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type EccentricityResolver<
     R = Maybe<number>,
     Parent = PayloadOrbitParams,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type EpochResolver<
     R = Maybe<Date>,
     Parent = PayloadOrbitParams,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type InclinationDegResolver<
     R = Maybe<number>,
     Parent = PayloadOrbitParams,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LifespanYearsResolver<
     R = Maybe<number>,
     Parent = PayloadOrbitParams,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LongitudeResolver<
     R = Maybe<number>,
     Parent = PayloadOrbitParams,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type MeanAnomalyResolver<
     R = Maybe<number>,
     Parent = PayloadOrbitParams,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type MeanMotionResolver<
     R = Maybe<number>,
     Parent = PayloadOrbitParams,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type PeriapsisKmResolver<
     R = Maybe<number>,
     Parent = PayloadOrbitParams,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type PeriodMinResolver<
     R = Maybe<number>,
     Parent = PayloadOrbitParams,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type RaanResolver<
     R = Maybe<number>,
     Parent = PayloadOrbitParams,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ReferenceSystemResolver<
     R = Maybe<string>,
     Parent = PayloadOrbitParams,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type RegimeResolver<
     R = Maybe<string>,
     Parent = PayloadOrbitParams,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type SemiMajorAxisKmResolver<
     R = Maybe<number>,
     Parent = PayloadOrbitParams,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace LaunchTelemetryResolvers {
   export interface Resolvers<
-    Context = MyContext,
+    TContext = MyContext,
     TypeParent = LaunchTelemetry
   > {
-    flight_club?: FlightClubResolver<Maybe<string>, TypeParent, Context>;
+    flight_club?: FlightClubResolver<Maybe<string>, TypeParent, TContext>;
   }
 
   export type FlightClubResolver<
     R = Maybe<string>,
     Parent = LaunchTelemetry,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace ShipResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Ship> {
-    abs?: AbsResolver<Maybe<number>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = Ship> {
+    abs?: AbsResolver<Maybe<number>, TypeParent, TContext>;
 
-    active?: ActiveResolver<Maybe<boolean>, TypeParent, Context>;
+    active?: ActiveResolver<Maybe<boolean>, TypeParent, TContext>;
 
     attempted_landings?: AttemptedLandingsResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    class?: ClassResolver<Maybe<number>, TypeParent, Context>;
+    class?: ClassResolver<Maybe<number>, TypeParent, TContext>;
 
-    course_deg?: CourseDegResolver<Maybe<number>, TypeParent, Context>;
+    course_deg?: CourseDegResolver<Maybe<number>, TypeParent, TContext>;
 
-    home_port?: HomePortResolver<Maybe<string>, TypeParent, Context>;
+    home_port?: HomePortResolver<Maybe<string>, TypeParent, TContext>;
 
-    id?: IdResolver<Maybe<string>, TypeParent, Context>;
+    id?: IdResolver<Maybe<string>, TypeParent, TContext>;
 
-    image?: ImageResolver<Maybe<string>, TypeParent, Context>;
+    image?: ImageResolver<Maybe<string>, TypeParent, TContext>;
 
-    imo?: ImoResolver<Maybe<number>, TypeParent, Context>;
+    imo?: ImoResolver<Maybe<number>, TypeParent, TContext>;
 
     missions?: MissionsResolver<
       Maybe<(Maybe<ShipMission>)[]>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    mmsi?: MmsiResolver<Maybe<number>, TypeParent, Context>;
+    mmsi?: MmsiResolver<Maybe<number>, TypeParent, TContext>;
 
-    model?: ModelResolver<Maybe<string>, TypeParent, Context>;
+    model?: ModelResolver<Maybe<string>, TypeParent, TContext>;
 
-    name?: NameResolver<Maybe<string>, TypeParent, Context>;
+    name?: NameResolver<Maybe<string>, TypeParent, TContext>;
 
-    position?: PositionResolver<Maybe<ShipLocation>, TypeParent, Context>;
+    position?: PositionResolver<Maybe<ShipLocation>, TypeParent, TContext>;
 
-    roles?: RolesResolver<Maybe<(Maybe<string>)[]>, TypeParent, Context>;
+    roles?: RolesResolver<Maybe<(Maybe<string>)[]>, TypeParent, TContext>;
 
-    speed_kn?: SpeedKnResolver<Maybe<number>, TypeParent, Context>;
+    speed_kn?: SpeedKnResolver<Maybe<number>, TypeParent, TContext>;
 
-    status?: StatusResolver<Maybe<string>, TypeParent, Context>;
+    status?: StatusResolver<Maybe<string>, TypeParent, TContext>;
 
     successful_landings?: SuccessfulLandingsResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    type?: TypeResolver<Maybe<string>, TypeParent, Context>;
+    type?: TypeResolver<Maybe<string>, TypeParent, TContext>;
 
-    url?: UrlResolver<Maybe<string>, TypeParent, Context>;
+    url?: UrlResolver<Maybe<string>, TypeParent, TContext>;
 
-    weight_kg?: WeightKgResolver<Maybe<number>, TypeParent, Context>;
+    weight_kg?: WeightKgResolver<Maybe<number>, TypeParent, TContext>;
 
-    weight_lbs?: WeightLbsResolver<Maybe<number>, TypeParent, Context>;
+    weight_lbs?: WeightLbsResolver<Maybe<number>, TypeParent, TContext>;
 
-    year_built?: YearBuiltResolver<Maybe<number>, TypeParent, Context>;
+    year_built?: YearBuiltResolver<Maybe<number>, TypeParent, TContext>;
   }
 
   export type AbsResolver<
     R = Maybe<number>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ActiveResolver<
     R = Maybe<boolean>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type AttemptedLandingsResolver<
     R = Maybe<number>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ClassResolver<
     R = Maybe<number>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type CourseDegResolver<
     R = Maybe<number>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type HomePortResolver<
     R = Maybe<string>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type IdResolver<
     R = Maybe<string>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ImageResolver<
     R = Maybe<string>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ImoResolver<
     R = Maybe<number>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type MissionsResolver<
     R = Maybe<(Maybe<ShipMission>)[]>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type MmsiResolver<
     R = Maybe<number>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ModelResolver<
     R = Maybe<string>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type NameResolver<
     R = Maybe<string>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type PositionResolver<
     R = Maybe<ShipLocation>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type RolesResolver<
     R = Maybe<(Maybe<string>)[]>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type SpeedKnResolver<
     R = Maybe<number>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type StatusResolver<
     R = Maybe<string>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type SuccessfulLandingsResolver<
     R = Maybe<number>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type TypeResolver<
     R = Maybe<string>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type UrlResolver<
     R = Maybe<string>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type WeightKgResolver<
     R = Maybe<number>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type WeightLbsResolver<
     R = Maybe<number>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type YearBuiltResolver<
     R = Maybe<number>,
     Parent = Ship,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace ShipMissionResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = ShipMission> {
-    flight?: FlightResolver<Maybe<string>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = ShipMission> {
+    flight?: FlightResolver<Maybe<string>, TypeParent, TContext>;
 
-    name?: NameResolver<Maybe<string>, TypeParent, Context>;
+    name?: NameResolver<Maybe<string>, TypeParent, TContext>;
   }
 
   export type FlightResolver<
     R = Maybe<string>,
     Parent = ShipMission,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type NameResolver<
     R = Maybe<string>,
     Parent = ShipMission,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace ShipLocationResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = ShipLocation> {
-    latitude?: LatitudeResolver<Maybe<number>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = ShipLocation> {
+    latitude?: LatitudeResolver<Maybe<number>, TypeParent, TContext>;
 
-    longitude?: LongitudeResolver<Maybe<number>, TypeParent, Context>;
+    longitude?: LongitudeResolver<Maybe<number>, TypeParent, TContext>;
   }
 
   export type LatitudeResolver<
     R = Maybe<number>,
     Parent = ShipLocation,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LongitudeResolver<
     R = Maybe<number>,
     Parent = ShipLocation,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace HistoriesResultResolvers {
   export interface Resolvers<
-    Context = MyContext,
+    TContext = MyContext,
     TypeParent = HistoriesResult
   > {
-    result?: ResultResolver<Maybe<Result>, TypeParent, Context>;
+    result?: ResultResolver<Maybe<Result>, TypeParent, TContext>;
 
-    data?: DataResolver<Maybe<(Maybe<History>)[]>, TypeParent, Context>;
+    data?: DataResolver<Maybe<(Maybe<History>)[]>, TypeParent, TContext>;
   }
 
   export type ResultResolver<
     R = Maybe<Result>,
     Parent = HistoriesResult,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type DataResolver<
     R = Maybe<(Maybe<History>)[]>,
     Parent = HistoriesResult,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace ResultResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Result> {
-    totalCount?: TotalCountResolver<Maybe<number>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = Result> {
+    totalCount?: TotalCountResolver<Maybe<number>, TypeParent, TContext>;
   }
 
   export type TotalCountResolver<
     R = Maybe<number>,
     Parent = Result,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace LandpadResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Landpad> {
+  export interface Resolvers<TContext = MyContext, TypeParent = Landpad> {
     attempted_landings?: AttemptedLandingsResolver<
       Maybe<string>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    details?: DetailsResolver<Maybe<string>, TypeParent, Context>;
+    details?: DetailsResolver<Maybe<string>, TypeParent, TContext>;
 
-    full_name?: FullNameResolver<Maybe<string>, TypeParent, Context>;
+    full_name?: FullNameResolver<Maybe<string>, TypeParent, TContext>;
 
-    id?: IdResolver<Maybe<string>, TypeParent, Context>;
+    id?: IdResolver<Maybe<string>, TypeParent, TContext>;
 
-    landing_type?: LandingTypeResolver<Maybe<string>, TypeParent, Context>;
+    landing_type?: LandingTypeResolver<Maybe<string>, TypeParent, TContext>;
 
-    location?: LocationResolver<Maybe<Location>, TypeParent, Context>;
+    location?: LocationResolver<Maybe<Location>, TypeParent, TContext>;
 
-    status?: StatusResolver<Maybe<string>, TypeParent, Context>;
+    status?: StatusResolver<Maybe<string>, TypeParent, TContext>;
 
     successful_landings?: SuccessfulLandingsResolver<
       Maybe<string>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    wikipedia?: WikipediaResolver<Maybe<string>, TypeParent, Context>;
+    wikipedia?: WikipediaResolver<Maybe<string>, TypeParent, TContext>;
   }
 
   export type AttemptedLandingsResolver<
     R = Maybe<string>,
     Parent = Landpad,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type DetailsResolver<
     R = Maybe<string>,
     Parent = Landpad,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type FullNameResolver<
     R = Maybe<string>,
     Parent = Landpad,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type IdResolver<
     R = Maybe<string>,
     Parent = Landpad,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LandingTypeResolver<
     R = Maybe<string>,
     Parent = Landpad,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LocationResolver<
     R = Maybe<Location>,
     Parent = Landpad,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type StatusResolver<
     R = Maybe<string>,
     Parent = Landpad,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type SuccessfulLandingsResolver<
     R = Maybe<string>,
     Parent = Landpad,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type WikipediaResolver<
     R = Maybe<string>,
     Parent = Landpad,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace LocationResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Location> {
-    latitude?: LatitudeResolver<Maybe<number>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = Location> {
+    latitude?: LatitudeResolver<Maybe<number>, TypeParent, TContext>;
 
-    longitude?: LongitudeResolver<Maybe<number>, TypeParent, Context>;
+    longitude?: LongitudeResolver<Maybe<number>, TypeParent, TContext>;
 
-    name?: NameResolver<Maybe<string>, TypeParent, Context>;
+    name?: NameResolver<Maybe<string>, TypeParent, TContext>;
 
-    region?: RegionResolver<Maybe<string>, TypeParent, Context>;
+    region?: RegionResolver<Maybe<string>, TypeParent, TContext>;
   }
 
   export type LatitudeResolver<
     R = Maybe<number>,
     Parent = Location,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LongitudeResolver<
     R = Maybe<number>,
     Parent = Location,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type NameResolver<
     R = Maybe<string>,
     Parent = Location,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type RegionResolver<
     R = Maybe<string>,
     Parent = Location,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace LaunchesPastResultResolvers {
   export interface Resolvers<
-    Context = MyContext,
+    TContext = MyContext,
     TypeParent = LaunchesPastResult
   > {
-    result?: ResultResolver<Maybe<Result>, TypeParent, Context>;
+    result?: ResultResolver<Maybe<Result>, TypeParent, TContext>;
 
-    data?: DataResolver<Maybe<(Maybe<Launch>)[]>, TypeParent, Context>;
+    data?: DataResolver<Maybe<(Maybe<Launch>)[]>, TypeParent, TContext>;
   }
 
   export type ResultResolver<
     R = Maybe<Result>,
     Parent = LaunchesPastResult,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type DataResolver<
     R = Maybe<(Maybe<Launch>)[]>,
     Parent = LaunchesPastResult,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace LaunchpadResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Launchpad> {
+  export interface Resolvers<TContext = MyContext, TypeParent = Launchpad> {
     attempted_launches?: AttemptedLaunchesResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    details?: DetailsResolver<Maybe<string>, TypeParent, Context>;
+    details?: DetailsResolver<Maybe<string>, TypeParent, TContext>;
 
-    id?: IdResolver<Maybe<string>, TypeParent, Context>;
+    id?: IdResolver<Maybe<string>, TypeParent, TContext>;
 
-    location?: LocationResolver<Maybe<Location>, TypeParent, Context>;
+    location?: LocationResolver<Maybe<Location>, TypeParent, TContext>;
 
-    name?: NameResolver<Maybe<string>, TypeParent, Context>;
+    name?: NameResolver<Maybe<string>, TypeParent, TContext>;
 
-    status?: StatusResolver<Maybe<string>, TypeParent, Context>;
+    status?: StatusResolver<Maybe<string>, TypeParent, TContext>;
 
     successful_launches?: SuccessfulLaunchesResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
 
     vehicles_launched?: VehiclesLaunchedResolver<
       Maybe<(Maybe<Rocket>)[]>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    wikipedia?: WikipediaResolver<Maybe<string>, TypeParent, Context>;
+    wikipedia?: WikipediaResolver<Maybe<string>, TypeParent, TContext>;
   }
 
   export type AttemptedLaunchesResolver<
     R = Maybe<number>,
     Parent = Launchpad,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type DetailsResolver<
     R = Maybe<string>,
     Parent = Launchpad,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type IdResolver<
     R = Maybe<string>,
     Parent = Launchpad,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LocationResolver<
     R = Maybe<Location>,
     Parent = Launchpad,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type NameResolver<
     R = Maybe<string>,
     Parent = Launchpad,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type StatusResolver<
     R = Maybe<string>,
     Parent = Launchpad,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type SuccessfulLaunchesResolver<
     R = Maybe<number>,
     Parent = Launchpad,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type VehiclesLaunchedResolver<
     R = Maybe<(Maybe<Rocket>)[]>,
     Parent = Launchpad,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type WikipediaResolver<
     R = Maybe<string>,
     Parent = Launchpad,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace MissionResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Mission> {
-    description?: DescriptionResolver<Maybe<string>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = Mission> {
+    description?: DescriptionResolver<Maybe<string>, TypeParent, TContext>;
 
-    id?: IdResolver<Maybe<string>, TypeParent, Context>;
+    id?: IdResolver<Maybe<string>, TypeParent, TContext>;
 
     manufacturers?: ManufacturersResolver<
       Maybe<(Maybe<string>)[]>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    name?: NameResolver<Maybe<string>, TypeParent, Context>;
+    name?: NameResolver<Maybe<string>, TypeParent, TContext>;
 
-    twitter?: TwitterResolver<Maybe<string>, TypeParent, Context>;
+    twitter?: TwitterResolver<Maybe<string>, TypeParent, TContext>;
 
-    website?: WebsiteResolver<Maybe<string>, TypeParent, Context>;
+    website?: WebsiteResolver<Maybe<string>, TypeParent, TContext>;
 
-    wikipedia?: WikipediaResolver<Maybe<string>, TypeParent, Context>;
+    wikipedia?: WikipediaResolver<Maybe<string>, TypeParent, TContext>;
 
-    payloads?: PayloadsResolver<Maybe<(Maybe<Payload>)[]>, TypeParent, Context>;
+    payloads?: PayloadsResolver<
+      Maybe<(Maybe<Payload>)[]>,
+      TypeParent,
+      TContext
+    >;
   }
 
   export type DescriptionResolver<
     R = Maybe<string>,
     Parent = Mission,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type IdResolver<
     R = Maybe<string>,
     Parent = Mission,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type ManufacturersResolver<
     R = Maybe<(Maybe<string>)[]>,
     Parent = Mission,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type NameResolver<
     R = Maybe<string>,
     Parent = Mission,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type TwitterResolver<
     R = Maybe<string>,
     Parent = Mission,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type WebsiteResolver<
     R = Maybe<string>,
     Parent = Mission,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type WikipediaResolver<
     R = Maybe<string>,
     Parent = Mission,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type PayloadsResolver<
     R = Maybe<(Maybe<Payload>)[]>,
     Parent = Mission,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace MissionResultResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = MissionResult> {
-    result?: ResultResolver<Maybe<Result>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = MissionResult> {
+    result?: ResultResolver<Maybe<Result>, TypeParent, TContext>;
 
-    data?: DataResolver<Maybe<(Maybe<Mission>)[]>, TypeParent, Context>;
+    data?: DataResolver<Maybe<(Maybe<Mission>)[]>, TypeParent, TContext>;
   }
 
   export type ResultResolver<
     R = Maybe<Result>,
     Parent = MissionResult,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type DataResolver<
     R = Maybe<(Maybe<Mission>)[]>,
     Parent = MissionResult,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace RoadsterResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = Roadster> {
-    apoapsis_au?: ApoapsisAuResolver<Maybe<number>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = Roadster> {
+    apoapsis_au?: ApoapsisAuResolver<Maybe<number>, TypeParent, TContext>;
 
-    details?: DetailsResolver<Maybe<string>, TypeParent, Context>;
+    details?: DetailsResolver<Maybe<string>, TypeParent, TContext>;
 
     earth_distance_km?: EarthDistanceKmResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
 
     earth_distance_mi?: EarthDistanceMiResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    eccentricity?: EccentricityResolver<Maybe<number>, TypeParent, Context>;
+    eccentricity?: EccentricityResolver<Maybe<number>, TypeParent, TContext>;
 
-    epoch_jd?: EpochJdResolver<Maybe<number>, TypeParent, Context>;
+    epoch_jd?: EpochJdResolver<Maybe<number>, TypeParent, TContext>;
 
-    inclination?: InclinationResolver<Maybe<number>, TypeParent, Context>;
+    inclination?: InclinationResolver<Maybe<number>, TypeParent, TContext>;
 
-    launch_date_unix?: LaunchDateUnixResolver<Maybe<Date>, TypeParent, Context>;
+    launch_date_unix?: LaunchDateUnixResolver<
+      Maybe<Date>,
+      TypeParent,
+      TContext
+    >;
 
-    launch_date_utc?: LaunchDateUtcResolver<Maybe<Date>, TypeParent, Context>;
+    launch_date_utc?: LaunchDateUtcResolver<Maybe<Date>, TypeParent, TContext>;
 
-    launch_mass_kg?: LaunchMassKgResolver<Maybe<number>, TypeParent, Context>;
+    launch_mass_kg?: LaunchMassKgResolver<Maybe<number>, TypeParent, TContext>;
 
-    launch_mass_lbs?: LaunchMassLbsResolver<Maybe<number>, TypeParent, Context>;
+    launch_mass_lbs?: LaunchMassLbsResolver<
+      Maybe<number>,
+      TypeParent,
+      TContext
+    >;
 
-    longitude?: LongitudeResolver<Maybe<number>, TypeParent, Context>;
+    longitude?: LongitudeResolver<Maybe<number>, TypeParent, TContext>;
 
     mars_distance_km?: MarsDistanceKmResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
 
     mars_distance_mi?: MarsDistanceMiResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    name?: NameResolver<Maybe<string>, TypeParent, Context>;
+    name?: NameResolver<Maybe<string>, TypeParent, TContext>;
 
-    norad_id?: NoradIdResolver<Maybe<number>, TypeParent, Context>;
+    norad_id?: NoradIdResolver<Maybe<number>, TypeParent, TContext>;
 
-    orbit_type?: OrbitTypeResolver<Maybe<number>, TypeParent, Context>;
+    orbit_type?: OrbitTypeResolver<Maybe<number>, TypeParent, TContext>;
 
-    periapsis_arg?: PeriapsisArgResolver<Maybe<number>, TypeParent, Context>;
+    periapsis_arg?: PeriapsisArgResolver<Maybe<number>, TypeParent, TContext>;
 
-    periapsis_au?: PeriapsisAuResolver<Maybe<number>, TypeParent, Context>;
+    periapsis_au?: PeriapsisAuResolver<Maybe<number>, TypeParent, TContext>;
 
-    period_days?: PeriodDaysResolver<Maybe<number>, TypeParent, Context>;
+    period_days?: PeriodDaysResolver<Maybe<number>, TypeParent, TContext>;
 
     semi_major_axis_au?: SemiMajorAxisAuResolver<
       Maybe<number>,
       TypeParent,
-      Context
+      TContext
     >;
 
-    speed_kph?: SpeedKphResolver<Maybe<number>, TypeParent, Context>;
+    speed_kph?: SpeedKphResolver<Maybe<number>, TypeParent, TContext>;
 
-    speed_mph?: SpeedMphResolver<Maybe<number>, TypeParent, Context>;
+    speed_mph?: SpeedMphResolver<Maybe<number>, TypeParent, TContext>;
 
-    wikipedia?: WikipediaResolver<Maybe<string>, TypeParent, Context>;
+    wikipedia?: WikipediaResolver<Maybe<string>, TypeParent, TContext>;
   }
 
   export type ApoapsisAuResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type DetailsResolver<
     R = Maybe<string>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type EarthDistanceKmResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type EarthDistanceMiResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type EccentricityResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type EpochJdResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type InclinationResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LaunchDateUnixResolver<
     R = Maybe<Date>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LaunchDateUtcResolver<
     R = Maybe<Date>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LaunchMassKgResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LaunchMassLbsResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type LongitudeResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type MarsDistanceKmResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type MarsDistanceMiResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type NameResolver<
     R = Maybe<string>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type NoradIdResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type OrbitTypeResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type PeriapsisArgResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type PeriapsisAuResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type PeriodDaysResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type SemiMajorAxisAuResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type SpeedKphResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type SpeedMphResolver<
     R = Maybe<number>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type WikipediaResolver<
     R = Maybe<string>,
     Parent = Roadster,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace RocketsResultResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = RocketsResult> {
-    result?: ResultResolver<Maybe<Result>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = RocketsResult> {
+    result?: ResultResolver<Maybe<Result>, TypeParent, TContext>;
 
-    data?: DataResolver<Maybe<(Maybe<Rocket>)[]>, TypeParent, Context>;
+    data?: DataResolver<Maybe<(Maybe<Rocket>)[]>, TypeParent, TContext>;
   }
 
   export type ResultResolver<
     R = Maybe<Result>,
     Parent = RocketsResult,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type DataResolver<
     R = Maybe<(Maybe<Rocket>)[]>,
     Parent = RocketsResult,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace ShipsResultResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = ShipsResult> {
-    result?: ResultResolver<Maybe<Result>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = ShipsResult> {
+    result?: ResultResolver<Maybe<Result>, TypeParent, TContext>;
 
-    data?: DataResolver<Maybe<(Maybe<Ship>)[]>, TypeParent, Context>;
+    data?: DataResolver<Maybe<(Maybe<Ship>)[]>, TypeParent, TContext>;
   }
 
   export type ResultResolver<
     R = Maybe<Result>,
     Parent = ShipsResult,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type DataResolver<
     R = Maybe<(Maybe<Ship>)[]>,
     Parent = ShipsResult,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export namespace MutationResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = {}> {}
+  export interface Resolvers<TContext = MyContext, TypeParent = {}> {}
 }
 
 export namespace SubscriptionResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = {}> {}
+  export interface Resolvers<TContext = MyContext, TypeParent = {}> {}
 }
 
 export namespace CoreMissionResolvers {
-  export interface Resolvers<Context = MyContext, TypeParent = CoreMission> {
-    name?: NameResolver<Maybe<string>, TypeParent, Context>;
+  export interface Resolvers<TContext = MyContext, TypeParent = CoreMission> {
+    name?: NameResolver<Maybe<string>, TypeParent, TContext>;
 
-    flight?: FlightResolver<Maybe<number>, TypeParent, Context>;
+    flight?: FlightResolver<Maybe<number>, TypeParent, TContext>;
   }
 
   export type NameResolver<
     R = Maybe<string>,
     Parent = CoreMission,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
   export type FlightResolver<
     R = Maybe<number>,
     Parent = CoreMission,
-    Context = MyContext
-  > = Resolver<R, Parent, Context>;
+    TContext = MyContext
+  > = Resolver<R, Parent, TContext>;
 }
 
 export type RateLimitDirectiveResolver<Result> = DirectiveResolverFn<
@@ -4916,77 +4979,79 @@ export interface ObjectIDScalarConfig
   name: "ObjectID";
 }
 
-export interface IResolvers<Context = MyContext> {
-  Query?: QueryResolvers.Resolvers<Context>;
-  Capsule?: CapsuleResolvers.Resolvers<Context>;
-  CapsuleMission?: CapsuleMissionResolvers.Resolvers<Context>;
-  Dragon?: DragonResolvers.Resolvers<Context>;
-  Distance?: DistanceResolvers.Resolvers<Context>;
-  DragonHeatShield?: DragonHeatShieldResolvers.Resolvers<Context>;
-  Mass?: MassResolvers.Resolvers<Context>;
-  Volume?: VolumeResolvers.Resolvers<Context>;
+export type IResolvers<TContext = MyContext> = {
+  Query?: QueryResolvers.Resolvers<TContext>;
+  Capsule?: CapsuleResolvers.Resolvers<TContext>;
+  CapsuleMission?: CapsuleMissionResolvers.Resolvers<TContext>;
+  Dragon?: DragonResolvers.Resolvers<TContext>;
+  Distance?: DistanceResolvers.Resolvers<TContext>;
+  DragonHeatShield?: DragonHeatShieldResolvers.Resolvers<TContext>;
+  Mass?: MassResolvers.Resolvers<TContext>;
+  Volume?: VolumeResolvers.Resolvers<TContext>;
   DragonPressurizedCapsule?: DragonPressurizedCapsuleResolvers.Resolvers<
-    Context
+    TContext
   >;
-  DragonThrust?: DragonThrustResolvers.Resolvers<Context>;
-  Force?: ForceResolvers.Resolvers<Context>;
-  DragonTrunk?: DragonTrunkResolvers.Resolvers<Context>;
-  DragonTrunkCargo?: DragonTrunkCargoResolvers.Resolvers<Context>;
-  Info?: InfoResolvers.Resolvers<Context>;
-  Address?: AddressResolvers.Resolvers<Context>;
-  InfoLinks?: InfoLinksResolvers.Resolvers<Context>;
-  Core?: CoreResolvers.Resolvers<Context>;
-  History?: HistoryResolvers.Resolvers<Context>;
-  Link?: LinkResolvers.Resolvers<Context>;
-  Launch?: LaunchResolvers.Resolvers<Context>;
-  LaunchSite?: LaunchSiteResolvers.Resolvers<Context>;
-  LaunchLinks?: LaunchLinksResolvers.Resolvers<Context>;
-  LaunchRocket?: LaunchRocketResolvers.Resolvers<Context>;
-  LaunchRocketFairings?: LaunchRocketFairingsResolvers.Resolvers<Context>;
-  LaunchRocketFirstStage?: LaunchRocketFirstStageResolvers.Resolvers<Context>;
+  DragonThrust?: DragonThrustResolvers.Resolvers<TContext>;
+  Force?: ForceResolvers.Resolvers<TContext>;
+  DragonTrunk?: DragonTrunkResolvers.Resolvers<TContext>;
+  DragonTrunkCargo?: DragonTrunkCargoResolvers.Resolvers<TContext>;
+  Info?: InfoResolvers.Resolvers<TContext>;
+  Address?: AddressResolvers.Resolvers<TContext>;
+  InfoLinks?: InfoLinksResolvers.Resolvers<TContext>;
+  Core?: CoreResolvers.Resolvers<TContext>;
+  History?: HistoryResolvers.Resolvers<TContext>;
+  Link?: LinkResolvers.Resolvers<TContext>;
+  Launch?: LaunchResolvers.Resolvers<TContext>;
+  LaunchSite?: LaunchSiteResolvers.Resolvers<TContext>;
+  LaunchLinks?: LaunchLinksResolvers.Resolvers<TContext>;
+  LaunchRocket?: LaunchRocketResolvers.Resolvers<TContext>;
+  LaunchRocketFairings?: LaunchRocketFairingsResolvers.Resolvers<TContext>;
+  LaunchRocketFirstStage?: LaunchRocketFirstStageResolvers.Resolvers<TContext>;
   LaunchRocketFirstStageCore?: LaunchRocketFirstStageCoreResolvers.Resolvers<
-    Context
+    TContext
   >;
-  Rocket?: RocketResolvers.Resolvers<Context>;
-  RocketEngines?: RocketEnginesResolvers.Resolvers<Context>;
-  RocketFirstStage?: RocketFirstStageResolvers.Resolvers<Context>;
-  RocketLandingLegs?: RocketLandingLegsResolvers.Resolvers<Context>;
-  RocketPayloadWeight?: RocketPayloadWeightResolvers.Resolvers<Context>;
-  RocketSecondStage?: RocketSecondStageResolvers.Resolvers<Context>;
+  Rocket?: RocketResolvers.Resolvers<TContext>;
+  RocketEngines?: RocketEnginesResolvers.Resolvers<TContext>;
+  RocketFirstStage?: RocketFirstStageResolvers.Resolvers<TContext>;
+  RocketLandingLegs?: RocketLandingLegsResolvers.Resolvers<TContext>;
+  RocketPayloadWeight?: RocketPayloadWeightResolvers.Resolvers<TContext>;
+  RocketSecondStage?: RocketSecondStageResolvers.Resolvers<TContext>;
   RocketSecondStagePayloads?: RocketSecondStagePayloadsResolvers.Resolvers<
-    Context
+    TContext
   >;
   RocketSecondStagePayloadCompositeFairing?: RocketSecondStagePayloadCompositeFairingResolvers.Resolvers<
-    Context
+    TContext
   >;
-  LaunchRocketSecondStage?: LaunchRocketSecondStageResolvers.Resolvers<Context>;
-  Payload?: PayloadResolvers.Resolvers<Context>;
-  PayloadOrbitParams?: PayloadOrbitParamsResolvers.Resolvers<Context>;
-  LaunchTelemetry?: LaunchTelemetryResolvers.Resolvers<Context>;
-  Ship?: ShipResolvers.Resolvers<Context>;
-  ShipMission?: ShipMissionResolvers.Resolvers<Context>;
-  ShipLocation?: ShipLocationResolvers.Resolvers<Context>;
-  HistoriesResult?: HistoriesResultResolvers.Resolvers<Context>;
-  Result?: ResultResolvers.Resolvers<Context>;
-  Landpad?: LandpadResolvers.Resolvers<Context>;
-  Location?: LocationResolvers.Resolvers<Context>;
-  LaunchesPastResult?: LaunchesPastResultResolvers.Resolvers<Context>;
-  Launchpad?: LaunchpadResolvers.Resolvers<Context>;
-  Mission?: MissionResolvers.Resolvers<Context>;
-  MissionResult?: MissionResultResolvers.Resolvers<Context>;
-  Roadster?: RoadsterResolvers.Resolvers<Context>;
-  RocketsResult?: RocketsResultResolvers.Resolvers<Context>;
-  ShipsResult?: ShipsResultResolvers.Resolvers<Context>;
-  Mutation?: MutationResolvers.Resolvers<Context>;
-  Subscription?: SubscriptionResolvers.Resolvers<Context>;
-  CoreMission?: CoreMissionResolvers.Resolvers<Context>;
+  LaunchRocketSecondStage?: LaunchRocketSecondStageResolvers.Resolvers<
+    TContext
+  >;
+  Payload?: PayloadResolvers.Resolvers<TContext>;
+  PayloadOrbitParams?: PayloadOrbitParamsResolvers.Resolvers<TContext>;
+  LaunchTelemetry?: LaunchTelemetryResolvers.Resolvers<TContext>;
+  Ship?: ShipResolvers.Resolvers<TContext>;
+  ShipMission?: ShipMissionResolvers.Resolvers<TContext>;
+  ShipLocation?: ShipLocationResolvers.Resolvers<TContext>;
+  HistoriesResult?: HistoriesResultResolvers.Resolvers<TContext>;
+  Result?: ResultResolvers.Resolvers<TContext>;
+  Landpad?: LandpadResolvers.Resolvers<TContext>;
+  Location?: LocationResolvers.Resolvers<TContext>;
+  LaunchesPastResult?: LaunchesPastResultResolvers.Resolvers<TContext>;
+  Launchpad?: LaunchpadResolvers.Resolvers<TContext>;
+  Mission?: MissionResolvers.Resolvers<TContext>;
+  MissionResult?: MissionResultResolvers.Resolvers<TContext>;
+  Roadster?: RoadsterResolvers.Resolvers<TContext>;
+  RocketsResult?: RocketsResultResolvers.Resolvers<TContext>;
+  ShipsResult?: ShipsResultResolvers.Resolvers<TContext>;
+  Mutation?: MutationResolvers.Resolvers<TContext>;
+  Subscription?: SubscriptionResolvers.Resolvers<TContext>;
+  CoreMission?: CoreMissionResolvers.Resolvers<TContext>;
   Date?: GraphQLScalarType;
   ObjectId?: GraphQLScalarType;
-}
+} & { [typeName: string]: never };
 
-export interface IDirectiveResolvers<Result> {
+export type IDirectiveResolvers<Result> = {
   rateLimit?: RateLimitDirectiveResolver<Result>;
   skip?: SkipDirectiveResolver<Result>;
   include?: IncludeDirectiveResolver<Result>;
   deprecated?: DeprecatedDirectiveResolver<Result>;
-}
+} & { [directiveName: string]: never };

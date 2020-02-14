@@ -68,7 +68,7 @@ export default r => {
     if (r.query.core_flight) {
       query['rocket.first_stage.cores.flight'] = parseInt(
         r.query.core_flight,
-        10
+        10,
       );
     }
     if (r.query.block) {
@@ -83,7 +83,7 @@ export default r => {
     if (r.query.second_stage_block) {
       query['rocket.second_stage.block'] = parseInt(
         r.query.second_stage_block,
-        10
+        10,
       );
     }
     if (r.query.fairings_reused) {
@@ -120,11 +120,11 @@ export default r => {
         r.query.capsule_reuse === 'true';
       query.$or = [
         {
-          'rocket.second_stage.payloads.payload_type': 'Dragon 1.1'
+          'rocket.second_stage.payloads.payload_type': 'Dragon 1.1',
         },
         {
-          'rocket.second_stage.payloads.payload_type': 'Crew Dragon'
-        }
+          'rocket.second_stage.payloads.payload_type': 'Crew Dragon',
+        },
       ];
     }
     if (r.query.ship) {
@@ -145,7 +145,7 @@ export default r => {
     if (r.query.norad_id) {
       query['rocket.second_stage.payloads.norad_id'] = parseInt(
         r.query.norad_id,
-        10
+        10,
       );
     }
     if (r.query.customer) {
@@ -173,7 +173,7 @@ export default r => {
     }
     if (r.query.longitude) {
       query['rocket.second_stage.payloads.orbit_params.longitude'] = parseFloat(
-        r.query.longitude
+        r.query.longitude,
       );
     }
     if (r.query.semi_major_axis_km) {
@@ -221,7 +221,7 @@ export default r => {
     }
     if (r.query.raan) {
       query['rocket.second_stage.payloads.orbit_params.raan'] = parseFloat(
-        r.query.raan
+        r.query.raan,
       );
     }
     if (r.query.launch_success) {
@@ -418,7 +418,7 @@ export default r => {
       acc[key] = { $regex: new RegExp(value, 'i') };
       return acc;
     },
-    {}
+    {},
   );
 
   return queryRegex;

@@ -6,7 +6,7 @@ const GraphQLRateLimit = createRateLimitDirective({
   },
   formatError: ({ fieldName }) => {
     return `Woah there ✋, you are doing way too much ${fieldName}`;
-  }
+  },
 });
 
 export default GraphQLRateLimit;
