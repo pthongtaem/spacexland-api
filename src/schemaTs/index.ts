@@ -1,15 +1,16 @@
 // import { makeExecutableSchema } from "apollo-server-express";
-import typeDefs from './typeDefs';
-import resolvers from './resolvers';
-import { rateLimit } from '../utils';
+import { buildSchema } from 'type-graphql';
 import {
-  makeExecutableSchema,
   makeRemoteExecutableSchema,
   introspectSchema,
   mergeSchemas,
 } from 'graphql-tools';
 import fetch from 'node-fetch';
 import { HttpLink } from 'apollo-link-http';
+import { CapsuleResolver } from './capsule';
+import { CompanyResolver } from './company';
+import { CoreResolver } from './core';
+import { DragonResolver } from './dragon';
 
 const uri = process.env.X_HASURA_URL;
 const headers = {
@@ -23,21 +24,17 @@ const link = new HttpLink({
 });
 
 export default async () => {
-  const remoteSchema = makeRemoteExecutableSchema({
-    schema: await introspectSchema(link),
-    link,
-  });
+  // const remoteSchema = makeRemoteExecutableSchema({
+  //   schema: await introspectSchema(link),
+  //   link,
+  // });
 
-  const localSchema = makeExecutableSchema({
-    typeDefs,
-    resolvers,
-    schemaDirectives: {
-      rateLimit,
-    },
+  const localSchema = await buildSchema({
+    resolvers: [CapsuleResolver, CompanyResolver, CoreResolver, DragonResolver],
   });
 
   const schema = mergeSchemas({
-    schemas: [remoteSchema, localSchema],
+    schemas: [localSchema],
   });
 
   return schema;

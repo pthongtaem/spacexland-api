@@ -15,13 +15,13 @@ export default (app, { schema, context }) => {
     introspection: true,
   });
 
-  const buildPath = path.join(process.cwd(), 'build');
+  // const buildPath = path.join(process.cwd(), 'build');
 
   // expose graphqli-explorer
-  app.use('/graphql', express.static(buildPath));
-  app.get('/graphql', (req, res) => {
-    res.sendFile(path.join(buildPath + '/index.html'));
-  });
+  // app.use('/graphql', express.static(buildPath));
+  // app.get('/graphql', (req, res) => {
+  //   res.sendFile(path.join(buildPath + '/index.html'));
+  // });
 
   // graphql api by default
   app.get('/', (_, res) => {
