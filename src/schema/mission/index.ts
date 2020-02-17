@@ -8,6 +8,7 @@ const collection = 'mission';
 const parseMissions = (mission: any) => ({
   ...mission,
   id: mission.mission_id,
+  name: mission.mission_name,
 });
 
 @Resolver()
