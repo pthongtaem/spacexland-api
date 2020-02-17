@@ -2,7 +2,7 @@ require('dotenv').config();
 import 'reflect-metadata';
 import express from 'express';
 import { getDB } from './context/db';
-import getSchema from './schemaTs';
+import getSchema from './schema';
 import context from './context';
 import graphql from './servers/graphql';
 import rest from './servers/rest';

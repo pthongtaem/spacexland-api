@@ -1,5 +1,5 @@
 // Prevent incorrect input
-import lowerCase from 'lower-case';
+import { lowerCase } from 'lower-case';
 
 /**
  * Builds Mongo sort object to set sorting direction
@@ -10,9 +10,9 @@ import lowerCase from 'lower-case';
 export default query => {
   let order;
 
-  if (lowerCase(query.order) === 'asc') {
+  if (query.order && lowerCase(query.order) === 'asc') {
     order = 1;
-  } else if (lowerCase(query.order) === 'desc') {
+  } else if (query.order && lowerCase(query.order) === 'desc') {
     order = -1;
   } else {
     order = 1;

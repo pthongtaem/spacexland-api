@@ -7,7 +7,7 @@ export const parsePayloads = (data, query) => {
   let match;
   data.forEach(launch => {
     launch.rocket.second_stage.payloads.forEach(payloadObj => {
-      let payload = parsePayloadObj(payloadObj);
+      const payload = parsePayloadObj(payloadObj);
       match = 0;
       if (Object.keys(query).length !== 0) {
         Object.entries(query).forEach(([key, value]) => {
@@ -31,7 +31,7 @@ export const parsePayload = (payload, payload_id) => {
   const { payloads } = payload.rocket.second_stage;
   let index = 0;
   const parsedPayloads = payloads.map((payloadObj, i) => {
-    let payload = parsePayloadObj(payloadObj);
+    const payload = parsePayloadObj(payloadObj);
     if (payload.id === payload_id) {
       index = i;
     }
