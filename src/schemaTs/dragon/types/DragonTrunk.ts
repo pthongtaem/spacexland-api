@@ -1,6 +1,6 @@
 import { ObjectType, Field } from 'type-graphql';
 import { DragonTrunkCargo } from './DragonTrunkCargo';
-import { Volume } from '../global/Volume';
+import { Volume } from '../../global/Volume';
 
 @ObjectType()
 export class DragonTrunk {

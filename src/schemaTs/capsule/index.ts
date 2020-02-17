@@ -1,6 +1,6 @@
 import { Resolver, Query, Ctx, Arg, Int, ID } from 'type-graphql';
-import { Capsule } from './Capsule';
-import { CapsulesFind } from './CapsulesFind';
+import { Capsule } from './types/Capsule';
+import { CapsulesFind } from './types/CapsulesFind';
 import { MyContext } from '../../types/MyContext';
 
 const collection = 'capsule';

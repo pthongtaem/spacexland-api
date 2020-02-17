@@ -1,10 +1,10 @@
 import { Resolver, Query, Ctx, Arg, Int } from 'type-graphql';
 import { MyContext } from '../../types/MyContext';
-import { Core } from './Core';
-import { CoresFind } from './CoresFind';
+import { Core } from './types/Core';
+import { CoresFind } from './types/CoresFind';
+import { parseCores } from './utils';
 
 const collection = 'core';
-const parseCores = (core: any): any => ({ ...core, id: core.core_serial });
 
 @Resolver()
 export class CoreResolver {

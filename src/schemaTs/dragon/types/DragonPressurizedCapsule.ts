@@ -1,5 +1,5 @@
 import { ObjectType, Field } from 'type-graphql';
-import { Volume } from '../global/Volume';
+import { Volume } from '../../global/Volume';
 
 @ObjectType()
 export class DragonPressurizedCapsule {

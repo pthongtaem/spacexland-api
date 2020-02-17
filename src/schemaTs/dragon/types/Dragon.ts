@@ -1,8 +1,8 @@
 import { ObjectType, Field, Int, ID, Float } from 'type-graphql';
-import { Distance } from '../global/Distance';
-import { Mass } from '../global/Mass';
+import { Distance } from '../../global/Distance';
+import { Mass } from '../../global/Mass';
 import { DragonHeatShield } from './DragonHeatShield';
-import { Volume } from '../global/Volume';
+import { Volume } from '../../global/Volume';
 import { DragonPressurizedCapsule } from './DragonPressurizedCapsule';
 import { DragonThrust } from './DragonThrust';
 import { DragonTrunk } from './DragonTrunk';
@@ -16,7 +16,7 @@ export class Dragon {
   crew_capacity: number;
 
   @Field({ nullable: true })
-  description?: String;
+  description?: string;
 
   @Field(() => Distance, { nullable: true })
   diameter?: Distance;
@@ -28,7 +28,7 @@ export class Dragon {
   dry_mass_lb?: number;
 
   @Field({ nullable: true })
-  first_flight?: String;
+  first_flight?: string;
 
   @Field(() => DragonHeatShield, { nullable: true })
   heat_shield?: DragonHeatShield;
@@ -46,7 +46,7 @@ export class Dragon {
   launch_payload_vol?: Volume;
 
   @Field(() => ID, { nullable: true })
-  name?: String;
+  name?: string;
 
   @Field(() => Int, { nullable: true })
   orbit_duration_yr?: number;
@@ -70,8 +70,8 @@ export class Dragon {
   trunk?: DragonTrunk;
 
   @Field({ nullable: true })
-  type?: String;
+  type?: string;
 
   @Field({ nullable: true })
-  wikipedia?: String;
+  wikipedia?: string;
 }

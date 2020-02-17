@@ -1,8 +1,7 @@
 import { Resolver, Query, Ctx, Arg, Int, ID } from 'type-graphql';
 import { MyContext } from '../../types/MyContext';
-import { Dragon } from './Dragon';
-
-const collection = 'dragon';
+import { Dragon } from './types/Dragon';
+import { collection } from './utils'
 
 @Resolver()
 export class DragonResolver {

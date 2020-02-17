@@ -1,5 +1,5 @@
 import { ObjectType, Field, Int, ID } from 'type-graphql';
-import { CapsuleMission } from '../capsule/CapsuleMission';
+import { CapsuleMission } from '../../capsule/types/CapsuleMission';
 
 @ObjectType()
 export class Core {

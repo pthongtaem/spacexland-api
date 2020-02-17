@@ -1,5 +1,5 @@
 import { ObjectType, Field, Int } from 'type-graphql';
-import { Force } from '../global/Force';
+import { Force } from '../../global/Force';
 
 @ObjectType()
 export class DragonThrust {

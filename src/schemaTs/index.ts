@@ -1,12 +1,4 @@
-// import { makeExecutableSchema } from "apollo-server-express";
 import { buildSchema } from 'type-graphql';
-import {
-  makeRemoteExecutableSchema,
-  introspectSchema,
-  mergeSchemas,
-} from 'graphql-tools';
-import fetch from 'node-fetch';
-import { HttpLink } from 'apollo-link-http';
 import { CapsuleResolver } from './capsule';
 import { CompanyResolver } from './company';
 import { CoreResolver } from './core';
@@ -14,25 +6,16 @@ import { DragonResolver } from './dragon';
 import { GraphQLSchema } from 'graphql';
 import { HistortyResolver } from './history';
 import { LandPadResolver } from './landpad';
-
-// const uri = process.env.X_HASURA_URL;
-// const headers = {
-//   'x-hasura-admin-secret': process.env.X_HASURA_ADMIN_SECRET,
-// };
-
-// const link = new HttpLink({
-//   uri,
-//   headers,
-//   fetch,
-// });
+import { PayloadResolver } from './payload';
+import { MissionResolver } from './mission';
+import { RocketResolver } from './rocket';
+import { LaunchResolver } from './launch';
+import { LaunchPadResolver } from './launchpad';
+import { RoadsterResolver } from './roaster';
+import { ShipResolver } from './ship';
 
 export default async (): Promise<GraphQLSchema> => {
-  // const remoteSchema = makeRemoteExecutableSchema({
-  //   schema: await introspectSchema(link),
-  //   link,
-  // });
-
-  const localSchema = await buildSchema({
+  const schema = await buildSchema({
     resolvers: [
       CapsuleResolver,
       CompanyResolver,
@@ -40,11 +23,14 @@ export default async (): Promise<GraphQLSchema> => {
       DragonResolver,
       HistortyResolver,
       LandPadResolver,
+      PayloadResolver,
+      MissionResolver,
+      RocketResolver,
+      LaunchResolver,
+      LaunchPadResolver,
+      RoadsterResolver,
+      ShipResolver,
     ],
-  });
-
-  const schema = mergeSchemas({
-    schemas: [localSchema],
   });
 
   return schema;

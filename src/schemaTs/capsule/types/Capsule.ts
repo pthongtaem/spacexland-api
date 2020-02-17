@@ -1,7 +1,8 @@
 import { ObjectType, Field, ID, Int, Root, Ctx } from 'type-graphql';
 import { CapsuleMission } from './CapsuleMission';
-import { Dragon } from '../dragon/Dragon';
-import { MyContext } from '../../types/MyContext';
+import { Dragon } from '../../dragon/types/Dragon';
+import { MyContext } from '../../../types/MyContext';
+import { collection as dragonCollection } from '../../dragon/utils'
 
 @ObjectType()
 export class Capsule {
@@ -34,7 +35,7 @@ export class Capsule {
     @Ctx() context?: MyContext,
   ): Promise<string | null> {
     const [data] = await context.db
-      .collection('dragon')
+      .collection(dragonCollection)
       .find({ id: parent.capsule_id })
       .limit(1)
       .toArray();

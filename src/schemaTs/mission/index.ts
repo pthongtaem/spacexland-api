@@ -1,47 +1,47 @@
 import { Resolver, Query, Ctx, Arg, Int, ID } from 'type-graphql';
 import { MyContext } from '../../types/MyContext';
-import { History } from './types/History';
-import { HistoryFind } from './types/HistoryFind';
-import { HistoriesResult } from './types/HistoriesResult';
+import { MissionsFind } from './types/MissionsFind';
+import { Mission } from './types/Mission';
+import { MissionResult } from './types/MissionResult';
 
-const collection = 'history';
+const collection = 'mission';
+const parseMissions = (mission: any) => ({
+  ...mission,
+  id: mission.mission_id,
+});
 
 @Resolver()
-export class HistortyResolver {
-  @Query(() => [History], { nullable: true })
-  async histories(
-    @Arg('find', () => HistoryFind, { nullable: true }) find: HistoryFind,
+export class MissionResolver {
+  @Query(() => [Mission], { nullable: 'itemsAndList' })
+  async missions(
+    @Arg('find', () => MissionsFind, { nullable: true }) find: MissionsFind,
     @Arg('limit', () => Int, { nullable: true }) limit?: number,
     @Arg('offset', () => Int, { nullable: true }) offset?: number,
-    @Arg('order', { nullable: true }) order?: string,
-    @Arg('sort', { nullable: true }) sort?: string,
     @Ctx() context?: MyContext,
-  ): Promise<History[] | null> {
+  ): Promise<Mission[] | null> {
     const data = await context.db
       .collection(collection)
       .find(context.find({ query: { ...find }, collection }))
-      .sort(context.sort({ query: { order, sort }, collection }))
       .skip(context.offset({ offset }))
       .limit(context.limit({ limit }))
+      .map(parseMissions)
       .toArray();
     return data;
   }
 
-  @Query(() => HistoriesResult, { nullable: true })
-  async historiesResult(
-    @Arg('find', () => HistoryFind, { nullable: true }) find: HistoryFind,
+  @Query(() => MissionResult, { nullable: true })
+  async missionsResult(
+    @Arg('find', () => MissionsFind, { nullable: true }) find: MissionsFind,
     @Arg('limit', () => Int, { nullable: true }) limit?: number,
     @Arg('offset', () => Int, { nullable: true }) offset?: number,
-    @Arg('order', { nullable: true }) order?: string,
-    @Arg('sort', { nullable: true }) sort?: string,
     @Ctx() context?: MyContext,
-  ): Promise<HistoriesResult | null> {
+  ): Promise<MissionResult | null> {
     const data = await context.db
       .collection(collection)
       .find(context.find({ query: { ...find }, collection }))
-      .sort(context.sort({ query: { order, sort }, collection }))
       .skip(context.offset({ offset }))
       .limit(context.limit({ limit }))
+      .map(parseMissions)
       .toArray();
     const { length: totalCount } = await context.db
       .collection(collection)
@@ -50,15 +50,16 @@ export class HistortyResolver {
     return { data, result: { totalCount } };
   }
 
-  @Query(() => History, { nullable: true })
-  async history(
+  @Query(() => Mission, { nullable: true })
+  async mission(
     @Arg('id', () => ID) id: string,
     @Ctx() context?: MyContext,
-  ): Promise<History | null> {
+  ): Promise<Mission | null> {
     const [data] = await context.db
       .collection(collection)
-      .find({ id: parseInt(id) })
+      .find({ mission_id: id })
       .limit(1)
+      .map(parseMissions)
       .toArray();
     return data;
   }

@@ -1,5 +1,5 @@
-import { ObjectType, Field, ID, Int, Float } from 'type-graphql';
-import { Address } from '../global/Address';
+import { ObjectType, Field, Int, Float } from 'type-graphql';
+import { Address } from '../../global/Address';
 import { InfoLinks } from './InfoLinks';
 
 @ObjectType()

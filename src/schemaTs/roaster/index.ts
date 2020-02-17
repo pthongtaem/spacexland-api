@@ -1,16 +1,16 @@
 import { Resolver, Query, Ctx } from 'type-graphql';
-import { Info } from './types/Info';
 import { MyContext } from '../../types/MyContext';
+import { Roadster } from './types/Roadster';
 
 const collection = 'info';
 
 @Resolver()
-export class CompanyResolver {
-  @Query(() => Info, { nullable: true })
-  async company(@Ctx() context?: MyContext): Promise<Info | null> {
+export class RoadsterResolver {
+  @Query(() => Roadster, { nullable: true })
+  async roadster(@Ctx() context?: MyContext): Promise<Roadster | null> {
     const [data] = await context.db
       .collection(collection)
-      .find({ name: 'SpaceX' })
+      .find({ name: "Elon Musk's Tesla Roadster" })
       .toArray();
     return data;
   }

@@ -1,5 +1,5 @@
 import { ObjectType, Field } from 'type-graphql';
-import { Result } from '../global/Result';
+import { Result } from '../../global/Result';
 import { History } from './History';
 
 @ObjectType()

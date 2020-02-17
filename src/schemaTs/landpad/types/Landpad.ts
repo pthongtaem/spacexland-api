@@ -1,5 +1,5 @@
 import { ObjectType, Field, ID } from 'type-graphql';
-import { Location } from '../global/Location';
+import { Location } from '../../global/Location';
 
 @ObjectType()
 export class Landpad {
